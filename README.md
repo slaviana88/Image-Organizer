@@ -1,5 +1,9 @@
 # Image-Organizer
 
+## Collaborators:
+* https://github.com/slaviana88
+* https://github.com/kbadova
+
 ## A web application which helps us organize our memories
 
 ### Technologies
