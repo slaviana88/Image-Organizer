@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.scss';
+// import Draggable from 'react-draggable';
 
 class CreateAlbum extends React.Component {
   render() {
