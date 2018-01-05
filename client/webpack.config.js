@@ -10,7 +10,8 @@ module.exports = {
   devServer: {
     inline: true,
     contentBase: './',
-    port: 3000
+    port: 3000,
+    historyApiFallback: true // In case we refresh the page, vizualize the last page you have been.
   },
   entry: path.resolve(APP_DIR, 'index.jsx'),
   output: {
@@ -45,6 +46,28 @@ module.exports = {
             loader: 'sass-loader'
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          }
+        ]
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: {
+          loader: 'file-loader'
+        }
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        loader: 'url-loader',
+        query: {mimetype: 'image/png'}
       }
     ]
   },
