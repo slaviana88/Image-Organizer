@@ -4,7 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack && webpack-dev-server"
+    "start": "webpack && webpack-dev-server",
+    "serve": "webpack-dev-server --env=dev --progress --colors --open"
   },
   "author": "",
   "license": "ISC",
