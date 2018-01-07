@@ -1,10 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import paths from 'paths';
-import {Link} from 'react-router-dom';
-
-import {fetchAlbums} from 'modules/albums';
+import { fetchAlbums } from './actions';
 
 class Albums extends React.Component {
   componentDidMount() {
@@ -13,26 +10,29 @@ class Albums extends React.Component {
 
   render() {
     console.log(this.props.albums);
-    const {albums} = this.props;
+    const { albums } = this.props;
 
     return (
       <div>
-        All albums list here
-        {albums &&
+        <h1>All albums list here</h1>
+        {albums ? albums.albums : 'Nqma albumi'}
+        {/* {albums &&
           albums.map(album => {
             return <div key={album.id}>{album.name}</div>;
-          })}
+          })} */}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => state.albums;
-
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    fetchAlbums: () => dispatch(fetchAlbums)
+    albums: state.albums.albums
   };
+};
+
+const mapDispatchToProps = {
+  fetchAlbums
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Albums);
