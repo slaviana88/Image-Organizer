@@ -27,3 +27,4 @@
 2) In new tab go to /server folder and run :
 * `npm install` -> to install the backend requirements
 * if you dont have postgresql installed, install it and then create a db `createdb image-organizer`
+* 
