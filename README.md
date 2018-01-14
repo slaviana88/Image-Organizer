@@ -8,7 +8,7 @@
 
 ### Technologies
 * NodeJs server
-* MongoDB
+* Postgre and sequelize lib
 * React + Redux + react-router
 
 
