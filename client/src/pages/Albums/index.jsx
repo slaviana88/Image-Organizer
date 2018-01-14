@@ -12,14 +12,16 @@ class Albums extends React.Component {
     console.log(this.props.albums);
     const { albums } = this.props;
 
+    const renderAlbums = albums ? albums.map((album, key) =>
+      <div key={key}>
+        <h2>{album.title}</h2>
+        <div>{album.description}</div>
+      </div>) : "Nqma albumi"
+
     return (
       <div>
         <h1>All albums list here</h1>
-        {albums ? albums.albums : 'Nqma albumi'}
-        {/* {albums &&
-          albums.map(album => {
-            return <div key={album.id}>{album.name}</div>;
-          })} */}
+        {renderAlbums }
       </div>
     );
   }

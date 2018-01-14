@@ -4,35 +4,10 @@ import {
   FAIL_FETCH_ALBUMS
 } from './constants';
 
-const initialAlbums = { albums: null };
-const exampleAlbums = [
-  {
-    id: 1,
-    name: 'Album for krasi',
-    user: {
-      name: 'krasi',
-      age: 21
-    }
-  },
-  {
-    id: 2,
-    name: 'Album for marto',
-    user: {
-      name: 'marto',
-      age: 21
-    }
-  },
-  {
-    id: 3,
-    name: 'Album for ivo',
-    user: {
-      name: 'ivo',
-      age: 22
-    }
-  }
-];
+const initialState = { albums: null };
 
-const albumsReducer = (state = { initialAlbums }, action) => {
+
+const albumsReducer = (state = initialState , action) => {
   let newState;
   switch (action.type) {
     case SUCCESS_FETCH_ALBUMS:
