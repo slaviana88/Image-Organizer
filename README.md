@@ -19,3 +19,12 @@
 * Adding descriptions per every moment
 * Adding a location per each picture (Google Maps integration)
 * Sharing an album in facebook (future aim)
+
+
+### Steps to run setup the project
+
+1) Go to /client folder and run `npm install && npm start` -> this will install the ui requirements and run the webpack dev server
+2) In new tab go to /server folder and run :
+* `npm install` -> to install the backend requirements
+* if you dont have postgresql installed, install it and then create a db `createdb image-organizer`
+* 
