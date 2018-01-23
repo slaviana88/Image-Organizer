@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
 import globalSagas from './global-saga';
 import createSagaMiddleware from 'redux-saga';
 
 import routes from 'routes';
-import reducers from 'modules';
+import reducers from './global-reducer';
 
 const sagaMiddleware = createSagaMiddleware();
 

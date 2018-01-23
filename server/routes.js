@@ -1,4 +1,4 @@
-const services = require('../services');
+const services = require('./services');
 
 module.exports = app => {
   app.get('/api', (req, res) =>

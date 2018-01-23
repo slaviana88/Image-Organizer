@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchAlbums } from './actions';
+import { fetchAlbums , createAlbum} from './actions';
 
 class Albums extends React.Component {
   componentDidMount() {
@@ -22,6 +22,7 @@ class Albums extends React.Component {
       <div>
         <h1>All albums list here</h1>
         {renderAlbums }
+        <Button onClick={}>Add album</Button>
       </div>
     );
   }
@@ -34,7 +35,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  fetchAlbums
+  fetchAlbums,
+  createAlbum
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Albums);
