@@ -1,3 +1,4 @@
+const db = require('./models');
 const services = require('./services');
 
 module.exports = app => {
