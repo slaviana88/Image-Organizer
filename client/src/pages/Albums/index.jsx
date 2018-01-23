@@ -2,15 +2,17 @@ import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Button} from 'reactstrap';
-import Popup from 'components/Popup';
+import {Modal, ModalBody, ModalFooter} from 'components/Modal';
 
 import {fetchAlbums, createAlbum} from './actions';
+
+import './styles.scss';
 
 class Albums extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCreateAlbumPopupOpened: false
+      isCreateAlbumModalOpened: false
     };
   }
 
@@ -18,16 +20,17 @@ class Albums extends React.Component {
     this.props.fetchAlbums();
   }
 
-  togglePopup = () => {
+  toggleModal = () => {
     this.setState(prevState => ({
-      isCreateAlbumPopupOpened: !prevState.isCreateAlbumPopupOpened
+      isCreateAlbumModalOpened: !prevState.isCreateAlbumModalOpened
     }));
   };
 
   render() {
-    const {isCreateAlbumPopupOpened} = this.state;
+    const {isCreateAlbumModalOpened} = this.state;
     const {albums} = this.props;
     console.log('albums', albums);
+
     const renderAlbums = _.isEmpty(albums)
       ? 'Nqma albumi'
       : albums.map((album, key) => (
@@ -38,14 +41,20 @@ class Albums extends React.Component {
         ));
 
     return (
-      <div>
+      <div className="list-albums">
+        {/*<MainNavigation />*/}
+
+        <div className="container" />
         <h1>All albums list here</h1>
-        {renderAlbums}
+        {}
 
-        <Button onClick={this.togglePopup}>Add album</Button>
+        <Button onClick={this.toggleModal}>Add album</Button>
 
-        {!isCreateAlbumPopupOpened ? null : (
-          <Popup togglePopup={this.togglePopup}>assadsasf</Popup>
+        {!isCreateAlbumModalOpened ? null : (
+          <Modal show={true} onCloseHandler={this.toggleModal}>
+            <ModalBody>assadsasf form here</ModalBody>
+            <ModalFooter>hello</ModalFooter>
+          </Modal>
         )}
       </div>
     );
