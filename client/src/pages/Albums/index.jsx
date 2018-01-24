@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
-import {connect} from 'react-redux';
-import {Button} from 'reactstrap';
-import {Modal, ModalBody, ModalFooter} from 'components/Modal';
+import { connect } from 'react-redux';
+import { Button } from 'reactstrap';
+import { Modal, ModalBody, ModalFooter } from 'components/Modal';
 
-import {fetchAlbums, createAlbum} from './actions';
+import { fetchAlbums, createAlbum } from './actions';
 
 import './styles.scss';
 
@@ -27,8 +27,8 @@ class Albums extends React.Component {
   };
 
   render() {
-    const {isCreateAlbumModalOpened} = this.state;
-    const {albums} = this.props;
+    const { isCreateAlbumModalOpened } = this.state;
+    const { albums } = this.props;
     console.log('albums', albums);
 
     const renderAlbums = _.isEmpty(albums)
@@ -41,12 +41,12 @@ class Albums extends React.Component {
         ));
 
     return (
-      <div className="list-albums">
+      <div className="list-albums-container">
         {/*<MainNavigation />*/}
 
         <div className="container" />
         <h1>All albums list here</h1>
-        {}
+        {renderAlbums}
 
         <Button onClick={this.toggleModal}>Add album</Button>
 
