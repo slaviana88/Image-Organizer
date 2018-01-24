@@ -1,8 +1,8 @@
 .navigation-container {
   height: 70px;
   background-color: #605681;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -24,11 +24,5 @@
 
   .new-album-btn {
     text-align: left;
-
-    .material-icons {
-      vertical-align: middle;
-      cursor: pointer;
-      font-size: 30px;
-    }
   }
 }

@@ -27,7 +27,6 @@ class Albums extends React.Component {
     return (
       <div className="list-albums-container">
         <div className="container" />
-        <h1>All albums list here</h1>
         {renderAlbums}
       </div>
     );
