@@ -1,4 +1,4 @@
-.property-box {
+.album-box {
   border: 1px solid black;
   margin: 10px;
   height: 160px;
@@ -6,7 +6,7 @@
   background-color: #ffffff;
   border: solid 1px #dbe1ec;
   height: 350px;
-  .property-image {
+  .album-image {
     height: 190px;
     cursor: pointer;
     background-color: #f8fafc;
@@ -17,7 +17,7 @@
     line-height: 190px;
     text-transform: uppercase;
     overflow: hidden;
-    .property-grid-image {
+    .album-grid-image {
       height: 100%;
       width: 100%;
       background-position: center;
@@ -27,33 +27,33 @@
   .grid-status {
     margin-top: -50px;
   }
-  .property-data {
+  .album-data {
     padding: 20px 14px;
     .address-data {
       padding-bottom: 20px;
-      .main-address {
+      .title {
         font-size: 16px;
         font-weight: 600;
         letter-spacing: -0.5px;
         text-align: left;
         color: #354052;
       }
-      .sub-address {
+      .description {
         font-size: 14px;
         text-align: left;
         color: #7f8fa4;
       }
     }
-    .seller-data {
+    .images-data {
       border-top: 1px solid #dbe1ec;
       padding-top: 20px;
-      .price {
+      .images-title {
         font-size: 16px;
         letter-spacing: -0.5px;
         text-align: left;
         color: #354052;
       }
-      .seller {
+      .total {
         font-size: 16px;
         letter-spacing: -0.5px;
         text-align: right;
