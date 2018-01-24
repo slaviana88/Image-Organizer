@@ -2,15 +2,14 @@ import axios from 'axios';
 import {call, put} from 'redux-saga/effects';
 
 import {CREATE_ALBUM_URL} from '../constants';
-import {successCreateAlbum, failCreateAlbum} from '../actions';
+import {successCreateAlbum, failCreateAlbum, fetchAlbums} from '../actions';
 
 export function* createAlbumWorker(action) {
   try {
-    const response = yield call(axios.get, CREATE_ALBUM_URL);
+    const response = yield call(axios.post, CREATE_ALBUM_URL, action.data);
 
     yield put(successCreateAlbum(response.data));
   } catch (error) {
-    console.log(error);
     yield put(failCreateAlbum(error.response.data));
   }
 }

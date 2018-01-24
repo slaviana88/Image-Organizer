@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Button} from 'reactstrap';
+import AlbumCreateForm from './AlbumCreateForm';
 import {Modal, ModalBody, ModalFooter} from 'components/Modal';
 
 import {fetchAlbums, createAlbum} from './actions';
@@ -46,13 +47,16 @@ class Albums extends React.Component {
 
         <div className="container" />
         <h1>All albums list here</h1>
-        {}
+        {renderAlbums}
 
         <Button onClick={this.toggleModal}>Add album</Button>
 
         {!isCreateAlbumModalOpened ? null : (
           <Modal show={true} onCloseHandler={this.toggleModal}>
-            <ModalBody>assadsasf form here</ModalBody>
+            <ModalBody>
+              asdsa
+              <AlbumCreateForm />
+            </ModalBody>
             <ModalFooter>hello</ModalFooter>
           </Modal>
         )}
