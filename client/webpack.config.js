@@ -29,21 +29,12 @@ module.exports = {
       {
         include: [APP_DIR, path.resolve('node_modules')],
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         include: [APP_DIR],
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader: 'file-loader'
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/,
-        loader: 'url-loader',
-        query: { mimetype: 'image/png' }
       },
       {
         use: {
@@ -55,6 +46,15 @@ module.exports = {
         test: /\.j(s|sx)$/,
         use: 'babel-loader',
         include: [APP_DIR]
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        loader: 'url-loader',
+        query: {mimetype: 'image/png'}
       }
     ]
   },

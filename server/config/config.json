@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "image-organizer",
+    "username": "image_organizer_user",
+    "password": "newPassword",
+    "database": "image_organizer",
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
