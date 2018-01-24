@@ -9,6 +9,7 @@ import Navigation from './pages/Navigation';
 
 import routes from 'routes';
 import reducers from './global-reducer';
+import './assets/styles/base.scss';
 
 const sagaMiddleware = createSagaMiddleware();
 

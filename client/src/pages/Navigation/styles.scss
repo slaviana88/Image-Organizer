@@ -7,9 +7,9 @@
   top: 0;
   width: 100%;
   z-index: 0;
+  line-height: 70px;
 
   .my-albums-title {
-    line-height: 70px;
     color: white;
     font-size: 20px;
     font-weight: 500;
@@ -19,6 +19,16 @@
       font-size: 38px;
       vertical-align: middle;
       cursor: pointer;
+    }
+  }
+
+  .new-album-btn {
+    text-align: left;
+
+    .material-icons {
+      vertical-align: middle;
+      cursor: pointer;
+      font-size: 30px;
     }
   }
 }
