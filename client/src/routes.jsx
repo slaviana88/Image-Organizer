@@ -14,7 +14,6 @@ function routes() {
       <Switch>
         <Route path={paths.dashboard} component={DashBoard} />
         <Route path={paths.albums} component={Albums} />
-        <Route path={paths.createAlbum} component={CreateAlbum} />
       </Switch>
     </Router>
   );
