@@ -5,18 +5,15 @@ import {Field, reduxForm} from 'redux-form';
 
 import {createAlbum} from '../actions';
 import renderInputField from '../../../shared/renderInputField';
+import renderTextArea from '../../../shared/renderTextArea';
 
 class AlbumCreateForm extends React.Component {
-  submit = data => {
-    console.log('in submit');
-    this.props.createAlbum(data);
-  };
+  submit = data => this.props.createAlbum(data);
 
   render() {
     const {handleSubmit, pristine, submitting} = this.props;
     return (
       <div>
-        aWWAED
         <form onSubmit={handleSubmit(this.submit.bind(this))}>
           <div className="form-group">
             <label className="form-label">Title</label>
@@ -26,12 +23,19 @@ class AlbumCreateForm extends React.Component {
               component={renderInputField}
               type="input"
             />
+            <label className="form-label">Description</label>
+            <Field
+              className="form-control"
+              name="description"
+              component={renderTextArea}
+              type="input"
+            />
           </div>
           <button
             className="btn btn-primary"
             type="submit"
             disabled={submitting || pristine}>
-            Save Changes
+            Create
           </button>
         </form>
       </div>
@@ -49,4 +53,3 @@ const mapStateToProps = state => {
   return {};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumCreateForm);
-// export default AlbumCreateForm;
