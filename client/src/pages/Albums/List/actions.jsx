@@ -27,9 +27,10 @@ export const failFetchAlbums = errors => {
   };
 };
 
-export const createAlbum = () => {
+export const createAlbum = data => {
   return {
-    type: CREATE_ALBUM
+    type: CREATE_ALBUM,
+    data
   };
 };
 

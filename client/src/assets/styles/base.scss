@@ -1,4 +1,5 @@
 @import '../../../node_modules/flexboxgrid/dist/flexboxgrid.css';
+@import '_colors.scss';
 
 .btn {
   border-radius: 4px;
@@ -48,5 +49,83 @@
 
   &:focus {
     box-shadow: 0 0 0 3px rgba(255, 89, 89, 0.25);
+  }
+}
+
+.form-control {
+  display: block;
+  padding: 16px 10px 16px 10px;
+  font-size: 19px;
+  color: $input_placeholder;
+  background-color: #fff;
+  border: solid 1px #ced0da;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: #354052;
+    font-size: 18px;
+    line-height: 1.06;
+    opacity: 0.4;
+  }
+
+  &.is-invalid {
+    border: 1px solid $alert;
+    padding-right: 30px;
+    background: url('/assets/images/input-x.svg') white no-repeat
+      calc(100% - 7px) !important;
+  }
+
+  &.is-valid {
+    padding-right: 30px;
+    background: url('/assets/images/icon-tick.svg') white no-repeat
+      calc(100% - 7px) !important;
+  }
+}
+
+select.form-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url('/assets/images/input-arrow.png') white no-repeat
+    calc(100% - 7px) !important;
+}
+
+.invalid-feedback {
+  font-family: SourceSansPro;
+  font-size: 16px;
+  line-height: 1.19;
+  text-align: left;
+  color: $alert;
+  padding-top: 5px;
+}
+
+.form-label {
+  font-size: 16px;
+  color: $text_label;
+  display: inline-block;
+  margin-bottom: 10px;
+
+  &.dark-label {
+    color: #ced0da;
+    font-size: 16px;
+  }
+}
+
+.form-group {
+  position: relative;
+  text-align: left;
+  padding-bottom: 15px;
+
+  .input-info {
+    font-size: 16px;
+    line-height: 1.13;
+    text-align: left;
+    color: #ced0da;
+    font-family: CerebriSansItalic;
+    padding-bottom: 15px;
+    margin-top: 0;
+    padding-top: 10px;
   }
 }

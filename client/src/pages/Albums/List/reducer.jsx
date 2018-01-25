@@ -21,7 +21,7 @@ const albumsReducer = (state = initialState, action) => {
       console.log('create reducer');
       console.log(action.data);
       newState = {
-        albums: action.data
+        albums: state.albums.concat(action.data)
       };
       break;
 
