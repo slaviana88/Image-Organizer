@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Modal, ModalBody, ModalFooter } from 'components/Modal';
 
+import AlbumCreateForm from '../Albums/AlbumCreateForm';
+
 import './styles.scss';
 
 class Navigation extends React.Component {
@@ -31,7 +33,9 @@ class Navigation extends React.Component {
         </div>
         {!this.state.isCreateAlbumModalOpened ? null : (
           <Modal show={true} onCloseHandler={this.toggleModal}>
-            <ModalBody>assadsasf form here</ModalBody>
+            <ModalBody>
+              <AlbumCreateForm />
+            </ModalBody>
             <ModalFooter>hello</ModalFooter>
           </Modal>
         )}
