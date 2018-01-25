@@ -1,6 +1,6 @@
 import { fork, all } from 'redux-saga/effects';
 
-import albumsSaga from './pages/Albums/watcher';
+import albumsSaga from './pages/Albums/List/watcher';
 
 const sagas = [albumsSaga];
 

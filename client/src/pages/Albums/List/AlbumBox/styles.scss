@@ -1,0 +1,74 @@
+.album-box {
+  border: 1px solid black;
+  margin: 10px;
+  height: 160px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: solid 1px #dbe1ec;
+  height: 350px;
+  .album-image {
+    height: 190px;
+    cursor: pointer;
+    background-color: #f8fafc;
+    font-size: 12px;
+    letter-spacing: -0.3px;
+    text-align: center;
+    color: #7f8fa4;
+    line-height: 190px;
+    text-transform: uppercase;
+    overflow: hidden;
+    .album-grid-image {
+      height: 100%;
+      width: 100%;
+      background-position: center;
+      background-size: cover;
+    }
+  }
+  .grid-status {
+    margin-top: -50px;
+  }
+  .album-data {
+    padding: 20px 14px;
+    .address-data {
+      padding-bottom: 20px;
+      .title {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        text-align: left;
+        color: #354052;
+      }
+      .description {
+        font-size: 14px;
+        text-align: left;
+        color: #7f8fa4;
+      }
+    }
+    .images-data {
+      border-top: 1px solid #dbe1ec;
+      padding-top: 20px;
+      .images-title {
+        font-size: 16px;
+        letter-spacing: -0.5px;
+        text-align: left;
+        color: #354052;
+      }
+      .total {
+        font-size: 16px;
+        letter-spacing: -0.5px;
+        text-align: right;
+        color: #354052;
+      }
+      .price-type {
+        font-size: 14px;
+        text-align: left;
+        color: #7f8fa4;
+      }
+      .seller-type {
+        font-size: 14px;
+        text-align: right;
+        color: #7f8fa4;
+      }
+    }
+  }
+}

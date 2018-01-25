@@ -1,0 +1,28 @@
+.navigation-container {
+  height: 70px;
+  background-color: #605681;
+  padding-left: 40px;
+  padding-right: 40px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+  line-height: 70px;
+
+  .my-albums-title {
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.8px;
+
+    .material-icons {
+      font-size: 38px;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  }
+
+  .new-album-btn {
+    text-align: left;
+  }
+}

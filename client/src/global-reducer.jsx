@@ -1,7 +1,7 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
-import albumsReducer from 'pages/Albums/reducer';
+import albumsReducer from 'pages/Albums/List/reducer';
 
-const allReducers = combineReducers({albums: albumsReducer});
+const allReducers = combineReducers({ albums: albumsReducer });
 
 export default allReducers;
