@@ -2,15 +2,58 @@ import React from 'react';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
-
+import Dropzone from 'react-dropzone';
 import {createAlbum} from '../List/actions';
 import renderInputField from '../../../shared/renderInputField';
 import renderTextArea from '../../../shared/renderTextArea';
 
+const renderDropzoneInputFactory = dropzone => field => {
+  const files = field.input.value;
+  return (
+    <div>
+      <Dropzone
+        ref={node => {
+          dropzone.ref = node;
+        }}
+        name={field.name}
+        className={field.className}
+        multiple={field.multiple}
+        style={field.style}
+        onDrop={filesToUpload => field.input.onChange(filesToUpload)}
+      />
+      {field.meta.touched &&
+        field.meta.error && <span className="error">{field.meta.error}</span>}
+    </div>
+  );
+};
+
 class AlbumCreateForm extends React.Component {
-  submit = data => this.props.createAlbum(data);
+  state = {
+    image: null
+  };
+  submit = data => {
+    const {image} = this.state;
+    let fileData = {};
+
+    if (!_.isNil(image.name) && !_.isNil(image.type)) {
+      fileData = {
+        filename: image.name,
+        file_type: image.type
+      };
+    }
+
+    this.props.createAlbum(data, fileData, image);
+  };
+
+  onDrop = files => {
+    this.setState({
+      image: files[0]
+    });
+  };
 
   render() {
+    let dropzone = {ref: null};
+    console.log(this.state.image);
     const {handleSubmit, pristine, submitting} = this.props;
     return (
       <div className="album-create-form">
@@ -31,6 +74,23 @@ class AlbumCreateForm extends React.Component {
               type="input"
             />
           </div>
+          <span
+            className="link"
+            onClick={() => {
+              dropzone.ref.open();
+            }}>
+            Replace
+          </span>
+          <Field
+            name="image"
+            className="image"
+            multiple={false}
+            component={renderDropzoneInputFactory(dropzone)}
+            style={{
+              backgroundImage: this.state.image
+            }}
+            onChange={(_, files) => this.onDrop(files)}
+          />
           <button
             className="btn btn-primary"
             type="submit"

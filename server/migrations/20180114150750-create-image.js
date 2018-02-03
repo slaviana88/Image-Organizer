@@ -21,6 +21,15 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      AlbumId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Albums',
+          key: 'id',
+          as: 'AlbumId'
+        }
       }
     });
   },

@@ -33,6 +33,8 @@
   * `sudo -u postgres psql -c "ALTER USER image_organizer_user WITH PASSWORD 'newPassword'"
 
 * migrate the database with `sequelize db:migrate`
+* in case you want to revert migrations: `sequelize db:migrate:undo:all`
+
 * run seeders with `sequelize db:seed`
 
 3) Run `node index.js` to start the node server

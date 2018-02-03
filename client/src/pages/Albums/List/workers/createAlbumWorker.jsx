@@ -6,7 +6,10 @@ import {successCreateAlbum, failCreateAlbum, fetchAlbums} from '../actions';
 
 export function* createAlbumWorker(action) {
   try {
-    const response = yield call(axios.post, CREATE_ALBUM_URL, action.data);
+    const {data, fileData, file} = action;
+    let newData = Object.assign({}, data, {image: fileData});
+
+    const response = yield call(axios.post, CREATE_ALBUM_URL, newData);
 
     yield put(successCreateAlbum(response.data));
   } catch (error) {

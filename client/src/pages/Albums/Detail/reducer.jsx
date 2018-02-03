@@ -7,7 +7,7 @@ const albumReducer = (state = initialState, action) => {
   switch (action.type) {
     case SUCCESS_FETCH_ALBUM:
       newState = {
-        albums: action.data
+        album: action.data
       };
       break;
 
