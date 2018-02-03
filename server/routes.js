@@ -17,5 +17,14 @@ module.exports = app => {
       .catch(err => console.log('Error with albums: ', err));
   });
 
+  app.get('/api/albums/:id/', function(req, res) {
+    db.Album
+      .findById(req.params.id)
+      .then(function(album) {
+        res.json(album);
+      })
+      .catch(err => console.log('Error with album: ', err));
+  });
+
   app.post('/api/albums/create', services.albums.create);
 };

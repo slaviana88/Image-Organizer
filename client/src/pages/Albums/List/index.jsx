@@ -18,13 +18,11 @@ class Albums extends React.Component {
 
   redirectToAbum = album => {
     const url = `/albums/${album.id}`;
-    console.log(url, 'url');
     this.props.dispatch(push(url));
   };
 
   render() {
     const {albums} = this.props;
-    console.log('albums', albums);
 
     const renderAlbums = _.isEmpty(albums)
       ? 'Nqma albumi'
