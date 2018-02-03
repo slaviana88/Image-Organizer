@@ -2,10 +2,10 @@ import React from 'react';
 
 import './styles.scss';
 
-const AlbumBox = ({album}) => {
+const AlbumBox = ({album, redirectToAlbum}) => {
   return (
     <div className="album-box">
-      <div className="album-image">
+      <div className="album-image" onClick={redirectToAlbum}>
         {album.images ? album.images[0] : 'Awaiting Photography'}
       </div>
       <div className="album-data">
