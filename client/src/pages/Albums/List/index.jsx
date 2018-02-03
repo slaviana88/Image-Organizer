@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React from 'react';
-import { connect } from 'react-redux';
-import { Button } from 'reactstrap';
+import {connect} from 'react-redux';
+import {Button} from 'reactstrap';
 
-import { fetchAlbums, createAlbum } from './actions';
+import {fetchAlbums, createAlbum} from './actions';
 import AlbumBox from './AlbumBox';
 import './styles.scss';
 
@@ -13,21 +13,22 @@ class Albums extends React.Component {
   }
 
   render() {
-    const { albums } = this.props;
+    const {albums} = this.props;
     console.log('albums', albums);
 
     const renderAlbums = _.isEmpty(albums)
       ? 'Nqma albumi'
       : albums.map((album, key) => (
-          <div key={key}>
+          <div key={key} className="col-md-3">
             <AlbumBox album={album} />
           </div>
         ));
 
     return (
       <div className="list-albums-container">
-        <div className="container" />
-        {renderAlbums}
+        <div className="container">
+          <div className="row">{renderAlbums}</div>
+        </div>
       </div>
     );
   }

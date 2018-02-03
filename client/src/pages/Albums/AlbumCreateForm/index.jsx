@@ -1,19 +1,17 @@
 import React from 'react';
 import _ from 'lodash';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import {connect} from 'react-redux';
+import {Field, reduxForm} from 'redux-form';
 
-import { createAlbum } from '../List/actions';
+import {createAlbum} from '../List/actions';
 import renderInputField from '../../../shared/renderInputField';
 import renderTextArea from '../../../shared/renderTextArea';
-
-import './styles.scss';
 
 class AlbumCreateForm extends React.Component {
   submit = data => this.props.createAlbum(data);
 
   render() {
-    const { handleSubmit, pristine, submitting } = this.props;
+    const {handleSubmit, pristine, submitting} = this.props;
     return (
       <div className="album-create-form">
         <form onSubmit={handleSubmit(this.submit.bind(this))}>
@@ -49,7 +47,7 @@ AlbumCreateForm = reduxForm({
   form: 'albumCreateForm'
 })(AlbumCreateForm);
 
-const mapDispatchToProps = { createAlbum };
+const mapDispatchToProps = {createAlbum};
 
 const mapStateToProps = state => {
   return {};
