@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import {fetchAlbum} from './actions';
-
 import './styles.scss';
 
 class AlbumDetail extends React.Component {
@@ -11,23 +10,31 @@ class AlbumDetail extends React.Component {
   }
 
   getAlbum = album => {
-    console.log(album);
     return (
       <div>
         <div>Title{album.title}</div>
         <div>Descr{album.description}</div>
         <div>Created {album.createdAt}</div>
         <div>Updated {album.updatedAt}</div>
+        {album.images &&
+          album.images.map((img, index) => {
+            console.log(img);
+            return (
+              <div key={index}>
+                name {img.name}
+                <img src={'http://localhost:3001/static/' + img.pathToFile} />
+              </div>
+            );
+          })}
       </div>
     );
   };
 
   render() {
-    console.log('safdjios');
     const {album} = this.props;
     return (
       <div className="album-container">
-        {_.isNil(album) ? 'No album found' : this.getAlbum(album)}
+        {_.isNil(album) ? 'No album found' : this.getAlbum(album[0])}
       </div>
     );
   }
