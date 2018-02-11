@@ -32,5 +32,8 @@ module.exports = {
         .then(album => res.status(201).send(album))
         .catch(error => res.status(400).send(error.message));
     }
+  },
+  addImage(req, res) {
+    console.log('here');
   }
 };
