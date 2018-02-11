@@ -3,12 +3,13 @@ import _ from 'lodash';
 import {connect} from 'react-redux';
 
 import {Modal, ModalBody} from 'components/Modal';
+import AddImageForm from './AddImageForm';
 
 import {fetchAlbum} from './actions';
 import './styles.scss';
 
 class AlbumDetail extends React.Component {
-  state = {imageUrl: null};
+  state = {imageUrl: null, openAddImage: false};
 
   componentDidMount() {
     this.props.fetchAlbum(this.props.match.params.albumId);
@@ -20,6 +21,10 @@ class AlbumDetail extends React.Component {
   };
 
   closeImage = () => this.setState({imageUrl: null});
+
+  closeAddImage = () => this.setState({openAddImage: false});
+
+  openAddImage = () => this.setState({openAddImage: true});
 
   getAlbum = album => {
     return (
@@ -48,22 +53,29 @@ class AlbumDetail extends React.Component {
   };
 
   render() {
-    const {imageUrl} = this.state;
+    const {imageUrl, openAddImage} = this.state;
     const {album} = this.props;
+
     return (
       <div className="album-container">
+        <button onClick={this.openAddImage}>Add image</button>
         {_.isNil(album) ? 'No album found' : this.getAlbum(album[0])}
 
         {imageUrl && (
-          <Modal
-            show={true}
-            onCloseHandler={this.closeImage}
-            imageUrl={imageUrl}>
+          <Modal show={true} onCloseHandler={this.closeImage}>
             <ModalBody>
               <div className="view-image">
                 <img src={'http://localhost:3001/static/' + imageUrl} />
               </div>
               <div>Tags and places here</div>
+            </ModalBody>
+          </Modal>
+        )}
+
+        {openAddImage && (
+          <Modal show={true} onCloseHandler={this.closeAddImage}>
+            <ModalBody>
+              <AddImageForm />
             </ModalBody>
           </Modal>
         )}

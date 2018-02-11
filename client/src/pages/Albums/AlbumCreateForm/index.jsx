@@ -2,31 +2,11 @@ import React from 'react';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
-import Dropzone from 'react-dropzone';
 import {createAlbum} from '../List/actions';
+import Dropzone from '../../../components/Dropzone';
 import renderInputField from '../../../shared/renderInputField';
 import renderTextArea from '../../../shared/renderTextArea';
 import defaultImage from '../../../assets/images/default_image.png';
-
-const renderDropzoneInputFactory = dropzone => field => {
-  const files = field.input.value;
-  return (
-    <div>
-      <Dropzone
-        ref={node => {
-          dropzone.ref = node;
-        }}
-        name={field.name}
-        className={field.className}
-        multiple={field.multiple}
-        style={field.style}
-        onDrop={filesToUpload => field.input.onChange(filesToUpload)}
-      />
-      {field.meta.touched &&
-        field.meta.error && <span className="error">{field.meta.error}</span>}
-    </div>
-  );
-};
 
 class AlbumCreateForm extends React.Component {
   state = {
@@ -87,7 +67,7 @@ class AlbumCreateForm extends React.Component {
             name="image"
             className="image"
             multiple={false}
-            component={renderDropzoneInputFactory(dropzone)}
+            component={Dropzone(dropzone)}
             style={{
               backgroundImage:
                 this.state.image !== null
