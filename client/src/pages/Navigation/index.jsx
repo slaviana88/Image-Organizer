@@ -36,7 +36,6 @@ class Navigation extends React.Component {
             <ModalBody>
               <AlbumCreateForm />
             </ModalBody>
-            <ModalFooter>hello</ModalFooter>
           </Modal>
         )}
       </div>

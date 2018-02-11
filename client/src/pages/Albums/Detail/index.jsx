@@ -18,7 +18,6 @@ class AlbumDetail extends React.Component {
         <div>Updated {album.updatedAt}</div>
         {album.images &&
           album.images.map((img, index) => {
-            console.log(img);
             return (
               <div key={index}>
                 name {img.name}

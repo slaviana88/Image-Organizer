@@ -6,6 +6,7 @@ import Dropzone from 'react-dropzone';
 import {createAlbum} from '../List/actions';
 import renderInputField from '../../../shared/renderInputField';
 import renderTextArea from '../../../shared/renderTextArea';
+import defaultImage from '../../../assets/images/default_image.png';
 
 const renderDropzoneInputFactory = dropzone => field => {
   const files = field.input.value;
@@ -54,6 +55,7 @@ class AlbumCreateForm extends React.Component {
   render() {
     let dropzone = {ref: null};
     console.log(this.state.image);
+    this.state.image ? console.log(this.state.image.preview.slice(5)) : null;
     const {handleSubmit, pristine, submitting} = this.props;
     return (
       <div className="album-create-form">
@@ -79,7 +81,7 @@ class AlbumCreateForm extends React.Component {
             onClick={() => {
               dropzone.ref.open();
             }}>
-            Replace
+            Add image
           </span>
           <Field
             name="image"
@@ -87,7 +89,10 @@ class AlbumCreateForm extends React.Component {
             multiple={false}
             component={renderDropzoneInputFactory(dropzone)}
             style={{
-              backgroundImage: this.state.image
+              backgroundImage:
+                this.state.image !== null
+                  ? `url(${this.state.image.preview})`
+                  : `url(${defaultImage})`
             }}
             onChange={(_, files) => this.onDrop(files)}
           />
