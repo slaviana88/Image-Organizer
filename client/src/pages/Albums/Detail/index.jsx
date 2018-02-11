@@ -58,7 +58,6 @@ class AlbumDetail extends React.Component {
 
     return (
       <div className="album-container">
-        <button onClick={this.openAddImage}>Add image</button>
         {_.isNil(album) ? 'No album found' : this.getAlbum(album[0])}
 
         {imageUrl && (
@@ -79,6 +78,7 @@ class AlbumDetail extends React.Component {
             </ModalBody>
           </Modal>
         )}
+        <button onClick={this.openAddImage}>Add image</button>
       </div>
     );
   }

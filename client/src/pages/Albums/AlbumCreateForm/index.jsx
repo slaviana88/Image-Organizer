@@ -1,9 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
+import {Dropzone} from 'react-dropzone';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 import {createAlbum} from '../List/actions';
-import Dropzone from '../../../components/Dropzone';
+import {dropzoneField} from '../../../components/Dropzone';
 import renderInputField from '../../../shared/renderInputField';
 import renderTextArea from '../../../shared/renderTextArea';
 import defaultImage from '../../../assets/images/default_image.png';
@@ -67,7 +68,7 @@ class AlbumCreateForm extends React.Component {
             name="image"
             className="image"
             multiple={false}
-            component={Dropzone(dropzone)}
+            component={dropzoneField(dropzone)}
             style={{
               backgroundImage:
                 this.state.image !== null

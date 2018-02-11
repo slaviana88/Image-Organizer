@@ -1,11 +1,11 @@
 import React from 'react';
-import {Dropzone as ReactDropzone} from 'react-dropzone';
+import Dropzone from 'react-dropzone';
 
-const Dropzone = dropzone => field => {
+export const dropzoneField = dropzone => field => {
   const files = field.input.value;
   return (
     <div>
-      <ReactDropzone
+      <Dropzone
         ref={node => {
           dropzone.ref = node;
         }}
@@ -21,4 +21,3 @@ const Dropzone = dropzone => field => {
   );
 };
 
-export default Dropzone;

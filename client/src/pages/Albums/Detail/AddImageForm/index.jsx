@@ -2,7 +2,8 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
-import Dropzone from '../../../../components/Dropzone';
+import {dropzoneField} from '../../../../components/Dropzone';
+
 import {addImage} from './actions';
 import defaultImage from '../../../../assets/images/default_image.png';
 
@@ -36,29 +37,27 @@ class AddImageForm extends React.Component {
     return (
       <div>
         <form onSubmit={handleSubmit(this.submit.bind(this))}>
-          {
-            <div className="form-group">
-              <span
-                className="link"
-                onClick={() => {
-                  dropzone.ref.open();
-                }}>
-                Add image
-              </span>
-              <Field
-                name="image"
-                multiple={false}
-                component={Dropzone(dropzone)}
-                style={{
-                  backgroundImage:
-                    image !== null
-                      ? `url(${image.preview})`
-                      : `url(${defaultImage})`
-                }}
-                onChange={(_, files) => this.onDrop(files)}
-              />
-            </div>
-          }
+          <div className="form-group">
+            <span
+              className="link"
+              onClick={() => {
+                dropzone.ref.open();
+              }}>
+              Add image
+            </span>
+            <Field
+              name="image"
+              multiple={false}
+              component={dropzoneField(dropzone)}
+              style={{
+                backgroundImage:
+                  image !== null
+                    ? `url(${image.preview})`
+                    : `url(${defaultImage})`
+              }}
+              onChange={(_, files) => this.onDrop(files)}
+            />
+          </div>
           <button
             className="btn btn-primary"
             type="submit"
