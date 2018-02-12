@@ -7,7 +7,7 @@ import { createAlbum } from '../List/actions';
 import renderInputField from '../../../shared/renderInputField';
 import renderTextArea from '../../../shared/renderTextArea';
 
-import './styles.scss';
+// import './styles.scss';
 
 class AlbumCreateForm extends React.Component {
   submit = data => this.props.createAlbum(data);
