@@ -1,15 +1,15 @@
 import React from 'react';
 import _ from 'lodash';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {Modal, ModalBody} from 'components/Modal';
+import { Modal, ModalBody } from 'components/Modal';
 import AddImageForm from './AddImageForm';
 
-import {fetchAlbum} from './actions';
+import { fetchAlbum } from './actions';
 import './styles.scss';
 
 class AlbumDetail extends React.Component {
-  state = {imageUrl: null, openAddImage: false};
+  state = { imageUrl: null, openAddImage: false };
 
   componentDidMount() {
     this.props.fetchAlbum(this.props.match.params.albumId);
@@ -17,14 +17,14 @@ class AlbumDetail extends React.Component {
 
   viewImage = imageUrl => {
     console.log(imageUrl);
-    this.setState({imageUrl});
+    this.setState({ imageUrl });
   };
 
-  closeImage = () => this.setState({imageUrl: null});
+  closeImage = () => this.setState({ imageUrl: null });
 
-  closeAddImage = () => this.setState({openAddImage: false});
+  closeAddImage = () => this.setState({ openAddImage: false });
 
-  openAddImage = () => this.setState({openAddImage: true});
+  openAddImage = () => this.setState({ openAddImage: true });
 
   getAlbum = album => {
     return (
@@ -53,8 +53,8 @@ class AlbumDetail extends React.Component {
   };
 
   render() {
-    const {imageUrl, openAddImage} = this.state;
-    const {album} = this.props;
+    const { imageUrl, openAddImage } = this.state;
+    const { album } = this.props;
 
     return (
       <div className="album-container">

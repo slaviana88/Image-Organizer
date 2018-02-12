@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Cross</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Tag/Incomplete" transform="translate(0.000000, -7.000000)">
+            <g id="Tag" transform="translate(-0.655172, 0.000000)">
+                <g id="Cross" transform="translate(0.655172, 7.000000)">
+                    <circle id="Oval" fill="#7F8FA4" cx="13" cy="13" r="13"></circle>
+                    <rect id="Rectangle" fill="#FFFFFF" transform="translate(13.187765, 13.187765) rotate(45.000000) translate(-13.187765, -13.187765) " x="12.0449077" y="6.99401459" width="2.28571429" height="12.3875005" rx="1.14285714"></rect>
+                    <rect id="Rectangle" fill="#FFFFFF" transform="translate(13.187765, 13.187765) rotate(-45.000000) translate(-13.187765, -13.187765) " x="12.0449077" y="6.99401459" width="2.28571429" height="12.3875005" rx="1.14285714"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

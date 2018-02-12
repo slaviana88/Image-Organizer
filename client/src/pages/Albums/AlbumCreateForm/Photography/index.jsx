@@ -2,27 +2,21 @@ import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
-import {
-  MIN_PROPERTY_IMAGE_HEIGHT,
-  MIN_PROPERTY_IMAGE_WIDTH
-} from 'src/global-constants';
 
 import {
   requestUpdatePhotographySection,
   addImage,
   removeImage,
-  moveImage,
-  deletePropertyImage
+  moveImage
 } from '../actions';
 
-import { getClosestThumbnailAsBackground } from 'src/shared/utils/thumbnails';
-import { checkImageIsBigEnough } from 'src/shared/utils/checkImageIsBigEnough';
-import { renderToggle } from 'src/shared/forms/renderToggle';
+import { renderToggle } from '../../../../shared/RenderToggle/';
 import {
   SortableContainer,
   SortableElement,
   arrayMove
 } from 'react-sortable-hoc';
+import { checkImageIsBigEnough } from './utils';
 
 import './styles.scss';
 
@@ -31,12 +25,7 @@ const Image = SortableElement(({ image, deleteImage, isDraggable }) => {
     if (image.newImage) {
       return { backgroundImage: `url(${image.preview})` };
     }
-    return getClosestThumbnailAsBackground(
-      _.get(image, 'thumbnails'),
-      200,
-      200,
-      image
-    );
+    return image;
   };
   const draggableClass = isDraggable ? 'draggable-image' : '';
 
@@ -122,22 +111,12 @@ class PhotographyDropzone extends React.Component {
     };
 
     files.forEach(file => {
-      checkImageIsBigEnough(
-        file,
-        MIN_PROPERTY_IMAGE_WIDTH,
-        MIN_PROPERTY_IMAGE_HEIGHT
-      )
-        .then(this.props.addImage)
-        .catch(showError);
+      console.log('dispatch', file);
+      // checkImageIsBigEnough(file, 200, 200)
+      this.props.addImage(file);
+      // .catch(showError);
     });
   }
-
-  submit = () => {
-    const propertyId = this.props.props.propertyId;
-
-    this.props.requestUpdatePhotographySection(this.props.images, propertyId);
-    this.props.nextSection(true);
-  };
 
   render() {
     const { handleSubmit, pristine, reset, submitting, images } = this.props;
@@ -156,7 +135,7 @@ class PhotographyDropzone extends React.Component {
               Upload Images
             </button>
             <div className="upload-images-label">
-              JPG or PNG supproted, minimum size is 1600x1200
+              JPG or PNG supproted, minimum size is ..
             </div>
           </div>
         </div>
@@ -195,9 +174,6 @@ class PhotographyDropzone extends React.Component {
           onDrop={this.onDrop.bind(this)}>
           {uploadFiles}
         </Dropzone>
-        <button className="btn btn-primary upload-btn" onClick={this.submit}>
-          Next Step
-        </button>
       </div>
     );
   }
@@ -205,13 +181,11 @@ class PhotographyDropzone extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    images: _.get(state, 'properties.property.photography.images', null)
+    images: _.get(state, 'createAlbum.images', [])
   };
 };
 
 const mapDispatchToProps = {
-  requestUpdatePhotographySection,
-  deletePropertyImage,
   addImage,
   removeImage,
   moveImage
