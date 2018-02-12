@@ -1,33 +1,45 @@
 import _ from 'lodash';
 import React from 'react';
-import { connect } from 'react-redux';
-import { Button } from 'reactstrap';
+import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 
-import { fetchAlbums, createAlbum } from './actions';
+import {Button} from 'reactstrap';
 import AlbumBox from './AlbumBox';
+
+import {ALBUM_DETAIL_URL} from './constants';
+import {fetchAlbums} from './actions';
+
 import './styles.scss';
 
 class Albums extends React.Component {
   componentDidMount() {
-    this.props.fetchAlbums();
+    this.props.dispatch(fetchAlbums());
   }
 
+  redirectToAbum = album => {
+    const url = `/albums/${album.id}`;
+    this.props.dispatch(push(url));
+  };
+
   render() {
-    const { albums } = this.props;
-    console.log('albums', albums);
+    const {albums} = this.props;
 
     const renderAlbums = _.isEmpty(albums)
       ? 'Nqma albumi'
       : albums.map((album, key) => (
-          <div key={key}>
-            <AlbumBox album={album} />
+          <div key={key} className="col-md-3">
+            <AlbumBox
+              album={album}
+              redirectToAlbum={() => this.redirectToAbum(album)}
+            />
           </div>
         ));
 
     return (
       <div className="list-albums-container">
-        <div className="container" />
-        {renderAlbums}
+        <div className="container">
+          <div className="row">{renderAlbums}</div>
+        </div>
       </div>
     );
   }
@@ -39,8 +51,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = {
-  fetchAlbums
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Albums);
+export default connect(mapStateToProps)(Albums);
