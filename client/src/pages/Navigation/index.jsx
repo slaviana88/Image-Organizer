@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Modal, ModalBody, ModalFooter } from 'components/Modal';
+import {Modal, ModalBody, ModalFooter} from 'components/Modal';
 
 import AlbumCreateForm from '../Albums/AlbumCreateForm';
 
 import './styles.scss';
 
 class Navigation extends React.Component {
-  state = { isCreateAlbumModalOpened: false };
+  state = {isCreateAlbumModalOpened: false};
 
   toggleModal = () => {
     this.setState(prevState => ({
@@ -36,7 +36,6 @@ class Navigation extends React.Component {
             <ModalBody>
               <AlbumCreateForm />
             </ModalBody>
-            <ModalFooter>hello</ModalFooter>
           </Modal>
         )}
       </div>
