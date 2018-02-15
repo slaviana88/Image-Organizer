@@ -2,7 +2,7 @@ import {
   FETCH_ALBUM,
   SUCCESS_FETCH_ALBUM,
   UPDATE_ALBUM,
-  SUCCESS_UPDATE_ALBUMS
+  SUCCESS_UPDATE_ALBUM
 } from './constants';
 
 export const fetchAlbum = data => {
@@ -27,9 +27,9 @@ export const updateAlbum = (albumId, files = {}) => {
   };
 };
 
-export const successUpdateAlbums = data => {
+export const successUpdateAlbum = data => {
   return {
-    type: SUCCESS_UPDATE_ALBUMS,
+    type: SUCCESS_UPDATE_ALBUM,
     data
   };
 };
