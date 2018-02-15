@@ -6,26 +6,28 @@ const Images = Album.hasMany(Image, {as: 'images'});
 
 module.exports = {
   create(req, res) {
-    if (req.files) {
-      const path = `${__dirname}/images/${req.files.file.name}`;
-      req.files.file.mv(path, function(err) {
-        if (err) return res.status(500).send(err);
+    console.log('request body', req.body);
+    console.log('files', req.files);
 
-        console.log('File uploaded!');
-        res.status(201).send('File uploaded');
+    if (req.files) {
+      req.files.file.map(file => {
+        const path = `${__dirname}/images/${file.name}`;
+        file.mv(path, function(err) {
+          if (err) return res.status(500).send(err);
+        });
       });
+      console.log('File uploaded!');
+      res.status(201).send('File uploaded');
     } else {
-      const {image} = req.body;
+      const {images} = req.body;
+
+      const imageToSave = images.map(img => ({pathToFile: img, name: img}));
+      console.log('images to save', imageToSave);
       const album = Album.create(
         {
           title: req.body.title,
           description: req.body.description,
-          images: [
-            {
-              name: 'picture 1',
-              pathToFile: image.filename
-            }
-          ]
+          images: imageToSave
         },
         {include: Images}
       )

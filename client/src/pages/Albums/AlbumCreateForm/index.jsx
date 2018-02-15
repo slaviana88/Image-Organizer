@@ -15,15 +15,7 @@ class AlbumCreateForm extends React.Component {
   submit = data => {
     let fileData = [];
 
-    _.each(this.props.images, image =>
-      fileData.push({
-        filename: image.name,
-        file_type: image.type
-      })
-    );
-    console.log('filedata', fileData);
-    console.log(this.props.images);
-    this.props.createAlbum(data, fileData, this.props.images);
+    this.props.createAlbum(data, this.props.images);
   };
 
   render() {
