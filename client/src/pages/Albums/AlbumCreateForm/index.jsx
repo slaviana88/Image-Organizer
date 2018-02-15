@@ -9,7 +9,7 @@ import renderInputField from '../../../shared/renderInputField';
 import renderTextArea from '../../../shared/renderTextArea';
 import defaultImage from '../../../assets/images/default_image.png';
 
-import PhotographyDropzone from './Photography';
+import PhotographyDropzone from '../Photography';
 
 class AlbumCreateForm extends React.Component {
   submit = data => {
@@ -76,7 +76,7 @@ const mapDispatchToProps = { createAlbum };
 
 const mapStateToProps = state => {
   return {
-    images: _.get(state, 'createAlbum.images', [])
+    images: _.get(state, 'dropzoneImages.images', [])
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumCreateForm);

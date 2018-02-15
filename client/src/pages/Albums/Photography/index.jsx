@@ -3,14 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 
-import {
-  requestUpdatePhotographySection,
-  addImage,
-  removeImage,
-  moveImage
-} from '../actions';
+import { addImage, removeImage, moveImage, deleteState } from './actions';
 
-import { renderToggle } from '../../../../shared/RenderToggle/';
+import { renderToggle } from '../../../shared/RenderToggle/';
 import {
   SortableContainer,
   SortableElement,
@@ -91,6 +86,10 @@ class PhotographyDropzone extends React.Component {
     };
   }
 
+  componentWillUnmount() {
+    this.props.deleteState();
+  }
+
   toggleReorder = () => {
     this.setState({
       reorderImages: !this.state.reorderImages
@@ -131,9 +130,7 @@ class PhotographyDropzone extends React.Component {
               <br />
               click below to choose files from your device.
             </div>
-            <button className="btn btn btn-primary upload-images">
-              Upload Images
-            </button>
+            <div className="btn btn-primary upload-images">Upload Images</div>
             <div className="upload-images-label">
               JPG or PNG supproted, minimum size is ..
             </div>
@@ -181,14 +178,15 @@ class PhotographyDropzone extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    images: _.get(state, 'createAlbum.images', [])
+    images: _.get(state, 'dropzoneImages.images', [])
   };
 };
 
 const mapDispatchToProps = {
   addImage,
   removeImage,
-  moveImage
+  moveImage,
+  deleteState
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
