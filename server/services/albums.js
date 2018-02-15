@@ -1,3 +1,4 @@
+const  _ = require('lodash')
 const fs = require('fs');
 
 const Album = require('../models').Album;
@@ -10,12 +11,21 @@ module.exports = {
     console.log('files', req.files);
 
     if (req.files) {
+      if (_.isArray(req.files.file)) {
       req.files.file.map(file => {
         const path = `${__dirname}/images/${file.name}`;
         file.mv(path, function(err) {
           if (err) return res.status(500).send(err);
         });
-      });
+      })}
+      else {
+         const {file} = req.files
+        const path = `${__dirname}/images/${file.name}`
+        file.mv(path, function(err) {
+          if (err) return res.status(500).send(err);
+        })
+
+      }
       console.log('File uploaded!');
       res.status(201).send('File uploaded');
     } else {
@@ -40,12 +50,21 @@ module.exports = {
     console.log('files', req.files);
 
     if (req.files) {
-      req.files.file.map(file => {
-        const path = `${__dirname}/images/${file.name}`;
+     if (_.isArray(req.files.file)) {
+        req.files.file.map(file => {
+          const path = `${__dirname}/images/${file.name}`;
+          file.mv(path, function(err) {
+            if (err) return res.status(500).send(err);
+          });
+        })
+      }
+      else {
+        const {file} = req.files
+        const path = `${__dirname}/images/${file.name}`
         file.mv(path, function(err) {
           if (err) return res.status(500).send(err);
-        });
-      });
+        })
+      }
       console.log('File uploaded!');
       res.status(201).send('File uploaded');
     } else {

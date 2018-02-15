@@ -7,6 +7,7 @@ import {successUpdateAlbum, failCreateAlbum, fetchAlbums} from '../actions';
 function* uploadImage(files, albumId) {
   const postData = new FormData();
   console.log('images', files);
+
   files.map(image => {
     console.log(image);
     postData.append('filename', image.name);
