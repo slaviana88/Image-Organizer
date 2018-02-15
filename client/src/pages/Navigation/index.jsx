@@ -15,21 +15,23 @@ class Navigation extends React.Component {
     return (
       <div className="navigation-container">
         <div className="row">
-          <div className="col-xs-1 my-albums-title">
-            My Albums <i className="material-icons">keyboard_arrow_right</i>
+          <div className="col-xs-4">
+            <span className="my-albums-title">
+              Albums <i className="material-icons">keyboard_arrow_right</i>
+            </span>
+            <span className="new-album-btn">
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  this.props.toggleCreateAlbumModal();
+                  this.props.deleteState();
+                }}>
+                New Album
+              </button>
+            </span>
           </div>
-          <div className="col-xs-2 new-album-btn">
-            <button
-              className="btn btn-secondary"
-              onClick={() => {
-                this.props.toggleCreateAlbumModal();
-                this.props.deleteState();
-              }}>
-              New Album
-            </button>
-          </div>
-          <div className="col-xs-5" />
-          <div className="col-xs-5" />
+          <div className="col-xs-4" />
+          <div className="col-xs-4" />
         </div>
         {!this.props.isOpenModal ? null : (
           <Modal
