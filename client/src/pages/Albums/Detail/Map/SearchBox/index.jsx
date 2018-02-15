@@ -11,6 +11,8 @@ import {
 } from 'react-google-maps';
 import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 
+import './styles.scss';
+
 const PlacesWithStandaloneSearchBox = compose(
   withProps({
     googleMapURL:
@@ -62,7 +64,7 @@ const PlacesWithStandaloneSearchBox = compose(
         }}
       />
     </StandaloneSearchBox>
-    <ol>
+    <ol className="search-box-results">
       {props.places.map(
         ({ place_id, formatted_address, geometry: { location } }) => (
           <li key={place_id}>

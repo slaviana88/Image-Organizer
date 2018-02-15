@@ -12,7 +12,7 @@ const MyMapComponent = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
       defaultZoom={12}
-      defaultCenter={{ lat: 51.5073509, lng: -0.12775829999998223 }}
+      defaultCenter={{ lat: props.latitude, lng: props.longtitude }}
       ref={map =>
         map &&
         !_.isEmpty(props.places) &&
@@ -21,7 +21,7 @@ const MyMapComponent = withScriptjs(
           lng: props.places[0].geometry.location.lng()
         })}>
       {props.isMarkerShown && (
-        <Marker position={{ lat: 51.5073509, lng: -0.12775829999998223 }} />
+        <Marker position={{ lat: props.latitude, lng: props.longtitude }} />
       )}
     </GoogleMap>
   ))
@@ -29,7 +29,13 @@ const MyMapComponent = withScriptjs(
 
 const mapStateToProps = state => {
   return {
-    places: state.album.places
+    places: state.album.places,
+    longtitude: _.isNil(state.album.album[0].longtitude)
+      ? -0.12775829999998223
+      : state.album.album[0].longtitude,
+    latitude: _.isNil(state.album.album[0].latitude)
+      ? 51.5073509
+      : state.album.album[0].latitude
   };
 };
 
