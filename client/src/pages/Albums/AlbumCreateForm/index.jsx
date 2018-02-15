@@ -13,8 +13,6 @@ import PhotographyDropzone from '../Photography';
 
 class AlbumCreateForm extends React.Component {
   submit = data => {
-    let fileData = [];
-
     this.props.createAlbum(data, this.props.images);
   };
 
