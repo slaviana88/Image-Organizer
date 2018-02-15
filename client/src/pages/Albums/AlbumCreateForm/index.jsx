@@ -12,27 +12,17 @@ import defaultImage from '../../../assets/images/default_image.png';
 import PhotographyDropzone from './Photography';
 
 class AlbumCreateForm extends React.Component {
-  state = {
-    image: null
-  };
   submit = data => {
-    const { image } = this.state;
-    let fileData = {};
+    let fileData = [];
 
-    if (!_.isNil(image.name) && !_.isNil(image.type)) {
-      fileData = {
+    _.each(this.props.images, (image) =>
+      fileData.push({
         filename: image.name,
         file_type: image.type
-      };
+      });
     }
 
-    this.props.createAlbum(data, fileData, image);
-  };
-
-  onDrop = files => {
-    this.setState({
-      image: files[0]
-    });
+    this.props.createAlbum(data, fileData, images);
   };
 
   render() {
