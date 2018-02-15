@@ -15,20 +15,19 @@ class AlbumCreateForm extends React.Component {
   submit = data => {
     let fileData = [];
 
-    _.each(this.props.images, (image) =>
+    _.each(this.props.images, image =>
       fileData.push({
         filename: image.name,
         file_type: image.type
-      });
-    }
+      })
+    );
 
-    this.props.createAlbum(data, fileData, images);
+    this.props.createAlbum(data, fileData, this.props.images);
   };
 
   render() {
     let dropzone = { ref: null };
-    console.log(this.state.image);
-    this.state.image ? console.log(this.state.image.preview.slice(5)) : null;
+
     const { handleSubmit, pristine, submitting } = this.props;
     return (
       <div className="album-create-form">
@@ -56,19 +55,6 @@ class AlbumCreateForm extends React.Component {
             }}>
             Add image
           </span>
-          {/* <Field
-            name="image"
-            className="image"
-            multiple={true}
-            component={dropzoneField(dropzone)}
-            style={{
-              backgroundImage:
-                this.state.image !== null
-                  ? `url(${this.state.image.preview})`
-                  : `url(${defaultImage})`
-            }}
-            onChange={(_, files) => this.onDrop(files)}
-          /> */}
           <PhotographyDropzone />
           <button
             className="btn btn-primary"
