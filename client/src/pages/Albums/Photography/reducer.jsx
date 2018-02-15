@@ -1,12 +1,18 @@
 import _ from 'lodash';
 import {arrayMove} from 'react-sortable-hoc';
-import {ADD_IMAGE, REMOVE_IMAGE, MOVE_IMAGE} from './constants';
+import {
+  ADD_IMAGE,
+  REMOVE_IMAGE,
+  MOVE_IMAGE,
+  DELETE_STATE,
+  ADD_INITIAL_IMAGES
+} from './constants';
 
 const initialState = {
   images: []
 };
 
-const createAlbumReducer = (state = initialState, action) => {
+const dropzoneImagesReducer = (state = initialState, action) => {
   var newState;
   switch (action.type) {
     case ADD_IMAGE:
@@ -24,6 +30,13 @@ const createAlbumReducer = (state = initialState, action) => {
       console.log('in add image reducer');
       break;
 
+    case ADD_INITIAL_IMAGES:
+      console.log(action);
+      newState = {
+        images: action.images
+      };
+      break;
+
     case REMOVE_IMAGE:
       newState = {
         images: state.images.filter(image => !_.isEqual(image, action.image))
@@ -36,6 +49,10 @@ const createAlbumReducer = (state = initialState, action) => {
       };
       break;
 
+    case DELETE_STATE:
+      newState = initialState;
+      break;
+
     default:
       return state;
   }
@@ -43,4 +60,4 @@ const createAlbumReducer = (state = initialState, action) => {
   return Object.assign({}, state, newState);
 };
 
-export default createAlbumReducer;
+export default dropzoneImagesReducer;
