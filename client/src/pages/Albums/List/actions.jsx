@@ -28,12 +28,11 @@ export const failFetchAlbums = errors => {
   };
 };
 
-export const createAlbum = (data, fileData = {}, file = {}) => {
+export const createAlbum = (data, files = {}) => {
   return {
     type: CREATE_ALBUM,
     data,
-    fileData,
-    file
+    files
   };
 };
 
