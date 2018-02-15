@@ -9,6 +9,14 @@ import PhotographyDropzone from '../Photography';
 import { fetchAlbum } from './actions';
 import './styles.scss';
 
+const transformDateTimeToDate = dateString => {
+  return new Date(dateString).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'numeric',
+    year: '2-digit'
+  });
+};
+
 class AlbumDetail extends React.Component {
   state = { imageUrl: null, openAddImage: false };
 
@@ -29,13 +37,26 @@ class AlbumDetail extends React.Component {
 
   getAlbum = album => {
     return (
-      <div class="row center-xs">
-        <div class="col-xs-10">
-          <div>Title{album.title}</div>
-          <div>Descr{album.description}</div>
-          <div>Created {album.createdAt}</div>
-          <div>Updated {album.updatedAt}</div>
-          <PhotographyDropzone />
+      <div className="row center-xs">
+        <div className="col-xs-11">
+          <div className="row">
+            <div className="col-xs-8">
+              <h2 className="album-title">{album.title}</h2>
+            </div>
+            <div className="col-xs-4 album-dates">
+              <span className="album-date-info">
+                Created At: {transformDateTimeToDate(album.createdAt)}
+              </span>
+              <span className="album-date-info">
+                Last update: {transformDateTimeToDate(album.createdAt)}
+              </span>
+            </div>
+          </div>
+          <div className="divider" />
+          <div className="album-description">{album.description}</div>
+          <div className="album-dropzone">
+            <PhotographyDropzone />
+          </div>
         </div>
       </div>
     );
@@ -59,15 +80,6 @@ class AlbumDetail extends React.Component {
             </ModalBody>
           </Modal>
         )}
-
-        {/* {openAddImage && (
-          <Modal show={true} onCloseHandler={this.closeAddImage}>
-            <ModalBody>
-              <AddImageForm />
-            </ModalBody>
-          </Modal>
-        )}
-        <button onClick={this.openAddImage}>Add image</button> */}
       </div>
     );
   }

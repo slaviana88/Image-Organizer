@@ -2,11 +2,17 @@ import React from 'react';
 
 import './styles.scss';
 
-const AlbumBox = ({album, redirectToAlbum}) => {
+const AlbumBox = ({ album, redirectToAlbum }) => {
   return (
     <div className="album-box">
       <div className="album-image" onClick={redirectToAlbum}>
-        {album.images ? album.images[0] : 'Awaiting Photography'}
+        {album.images ? (
+          <img
+            src={'http://localhost:3001/static/' + album.images[0].pathToFile}
+          />
+        ) : (
+          'Awaiting Photography'
+        )}
       </div>
       <div className="album-data">
         <div className="row address-data">
