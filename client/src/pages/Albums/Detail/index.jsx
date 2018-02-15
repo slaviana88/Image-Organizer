@@ -6,8 +6,10 @@ import { Modal, ModalBody } from 'components/Modal';
 import AddImageForm from './AddImageForm';
 import PhotographyDropzone from '../Photography';
 
-import { fetchAlbum } from './actions';
+import { fetchAlbum, updateAlbum, setPlaces } from './actions';
 import './styles.scss';
+import MyMapComponent from './Map';
+import PlacesWithStandaloneSearchBox from './Map/SearchBox';
 
 const transformDateTimeToDate = dateString => {
   return new Date(dateString).toLocaleDateString('en-GB', {
@@ -18,7 +20,7 @@ const transformDateTimeToDate = dateString => {
 };
 
 class AlbumDetail extends React.Component {
-  state = { imageUrl: null, openAddImage: false };
+  state = { imageUrl: null, openAddImage: false, isOpenGoogleMaps: false };
 
   componentDidMount() {
     this.props.fetchAlbum(this.props.match.params.albumId);
@@ -31,13 +33,19 @@ class AlbumDetail extends React.Component {
 
   closeImage = () => this.setState({ imageUrl: null });
 
+  toggleGoogleMaps = () =>
+    this.setState({ isOpenGoogleMaps: !this.state.isOpenGoogleMaps });
+
   closeAddImage = () => this.setState({ openAddImage: false });
 
   openAddImage = () => this.setState({ openAddImage: true });
 
+  updateAlbum = event => {
+    this.props.updateAlbum(this.props.match.params.albumId, this.props.images);
+  };
   getAlbum = album => {
     return (
-      <div className="row center-xs">
+      <div className="">
         <div className="col-xs-11">
           <div className="row">
             <div className="col-xs-8">
@@ -54,8 +62,10 @@ class AlbumDetail extends React.Component {
           </div>
           <div className="divider" />
           <div className="album-description">{album.description}</div>
+          <div onClick={() => this.toggleGoogleMaps()}>Open Directions</div>
           <div className="album-dropzone">
             <PhotographyDropzone />
+            <button onClick={this.updateAlbum}>Save</button>
           </div>
         </div>
       </div>
@@ -63,7 +73,7 @@ class AlbumDetail extends React.Component {
   };
 
   render() {
-    const { imageUrl, openAddImage } = this.state;
+    const { imageUrl, openAddImage, isOpenGoogleMaps } = this.state;
     const { album } = this.props;
 
     return (
@@ -117,12 +127,15 @@ class AlbumDetail extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    album: state.album.album
+    album: state.album.album,
+    images: state.dropzoneImages.images
   };
 };
 
 const mapDispatchToProps = {
-  fetchAlbum: fetchAlbum
+  fetchAlbum,
+  setPlaces,
+  updateAlbum
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumDetail);

@@ -38,7 +38,10 @@ const Image = SortableElement(({image, deleteImage, isDraggable}) => {
           )}
         </div>
       ) : (
-        <img src={'http://localhost:3001/static/' + image.pathToFile} />
+        <img
+          className="property-image-sortable"
+          src={'http://localhost:3001/static/' + image.pathToFile}
+        />
       )}
     </div>
   );
