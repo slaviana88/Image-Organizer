@@ -8,6 +8,7 @@ const AlbumBox = ({ album, redirectToAlbum }) => {
       <div className="album-image" onClick={redirectToAlbum}>
         {album.images ? (
           <img
+            className="album-grid-image"
             src={'http://localhost:3001/static/' + album.images[0].pathToFile}
           />
         ) : (
@@ -21,9 +22,9 @@ const AlbumBox = ({ album, redirectToAlbum }) => {
         </div>
         <div className="row images-data">
           <div className="col-md-6 images-title">Images</div>
-          <div className="col-md-6 total">нгфифднлифн </div>
-          <div className="col-md-6 price-type">847849</div>
-          <div className="col-md-6 seller-type">идфнхидснл</div>
+          <div className="col-md-6" />
+          <div className="col-md-6 price-type">{album.images.length}</div>
+          <div className="col-md-6" />
         </div>
       </div>
     </div>

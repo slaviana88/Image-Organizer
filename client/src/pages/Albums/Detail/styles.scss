@@ -38,6 +38,18 @@
   .save-direction-container {
     text-align: right;
   }
+  .open-directions {
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .save-btn-container {
+    margin-top: 20px;
+    text-align: center;
+    .save-changes {
+      width: 200px;
+    }
+  }
 }
 
 .image {

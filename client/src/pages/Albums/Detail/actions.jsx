@@ -20,7 +20,6 @@ export const successFetchAlbum = data => {
   };
 };
 
-
 export const setPlaces = places => {
   return {
     type: SET_PLACES,
@@ -28,11 +27,12 @@ export const setPlaces = places => {
   };
 };
 
-export const updateAlbum = (albumId, files = {}) => {
+export const updateAlbum = (albumId, files = {}, data = {}) => {
   return {
     type: UPDATE_ALBUM,
     albumId,
-    files
+    files,
+    data
   };
 };
 

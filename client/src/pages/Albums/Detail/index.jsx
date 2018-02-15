@@ -41,7 +41,21 @@ class AlbumDetail extends React.Component {
   openAddImage = () => this.setState({ openAddImage: true });
 
   updateAlbum = event => {
-    this.props.updateAlbum(this.props.match.params.albumId, this.props.images);
+    const data = !_.isNil(this.props.directions)
+      ? Object.assign(
+          {},
+          {
+            latitude: this.props.directions.lat(),
+            longtitude: this.props.directions.lng()
+          }
+        )
+      : {};
+    console.log(data);
+    this.props.updateAlbum(
+      this.props.match.params.albumId,
+      this.props.images,
+      data
+    );
   };
   getAlbum = album => {
     return (
@@ -61,11 +75,25 @@ class AlbumDetail extends React.Component {
             </div>
           </div>
           <div className="divider" />
-          <div className="album-description">{album.description}</div>
-          <div onClick={() => this.toggleGoogleMaps()}>Open Directions</div>
+          <div className="row">
+            <div className="col-xs-10 album-description">
+              {album.description}
+            </div>
+            <div
+              className="col-xs-2 open-directions btn btn-primary"
+              onClick={() => this.toggleGoogleMaps()}>
+              Open Directions
+            </div>
+          </div>
           <div className="album-dropzone">
             <PhotographyDropzone />
-            <button onClick={this.updateAlbum}>Save</button>
+            <div className="save-btn-container">
+              <button
+                className="btn btn-secondary save-changes"
+                onClick={this.updateAlbum}>
+                Save Changes
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -128,7 +156,8 @@ class AlbumDetail extends React.Component {
 const mapStateToProps = state => {
   return {
     album: state.album.album,
-    images: state.dropzoneImages.images
+    images: state.dropzoneImages.images,
+    directions: _.get(state.album, 'places[0].geometry.location')
   };
 };
 

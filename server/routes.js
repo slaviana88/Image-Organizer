@@ -10,7 +10,7 @@ module.exports = app => {
 
   app.get('/albums', function(req, res) {
     db.Album
-      .findAll()
+      .findAll({ include: { model: db.Image, as: 'images' } })
       .then(function(albums) {
         res.json(albums);
       })
@@ -20,8 +20,8 @@ module.exports = app => {
   app.get('/api/albums/:id/', function(req, res) {
     db.Album
       .findAll({
-        where: {id: req.params.id},
-        include: {model: db.Image, as: 'images'}
+        where: { id: req.params.id },
+        include: { model: db.Image, as: 'images' }
       })
       .then(function(album) {
         // res.json(album);

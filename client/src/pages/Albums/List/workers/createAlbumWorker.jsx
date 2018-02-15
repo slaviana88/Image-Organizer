@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {call, put} from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 
-import {CREATE_ALBUM_URL} from '../constants';
-import {successCreateAlbum, failCreateAlbum, fetchAlbums} from '../actions';
+import { CREATE_ALBUM_URL } from '../constants';
+import { successCreateAlbum, failCreateAlbum, fetchAlbums } from '../actions';
 
 function* uploadImage(files) {
   const postData = new FormData();
@@ -18,7 +18,7 @@ function* uploadImage(files) {
 
 export function* createAlbumWorker(action) {
   try {
-    const {data, files} = action;
+    const { data, files } = action;
 
     yield call(uploadImage, files);
 
@@ -28,7 +28,9 @@ export function* createAlbumWorker(action) {
 
     const response = yield call(axios.post, CREATE_ALBUM_URL, newData);
 
-    yield put(successCreateAlbum(response.data));
+    yield* [put(successCreateAlbum(response.data))].concat(
+      action.extraActions.map(a => a())
+    );
   } catch (error) {
     console.log(error);
     // yield put(failCreateAlbum(error.response.data));

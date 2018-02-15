@@ -1,21 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import {Modal, ModalBody, ModalFooter} from 'components/Modal';
+import { Modal, ModalBody, ModalFooter } from 'components/Modal';
 
+import { deleteState } from '../Albums/Photography/actions';
 import AlbumCreateForm from '../Albums/AlbumCreateForm';
+import { toggleCreateAlbumModal } from './reducer';
 
 import './styles.scss';
 
 class Navigation extends React.Component {
-  state = {isCreateAlbumModalOpened: false};
-
-  toggleModal = () => {
-    this.setState(prevState => ({
-      isCreateAlbumModalOpened: !prevState.isCreateAlbumModalOpened
-    }));
-  };
-
   render() {
     return (
       <div className="navigation-container">
@@ -24,17 +19,26 @@ class Navigation extends React.Component {
             My Albums <i className="material-icons">keyboard_arrow_right</i>
           </div>
           <div className="col-xs-2 new-album-btn">
-            <button className="btn btn-secondary" onClick={this.toggleModal}>
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                this.props.toggleCreateAlbumModal();
+                this.props.deleteState();
+              }}>
               New Album
             </button>
           </div>
           <div className="col-xs-5" />
           <div className="col-xs-5" />
         </div>
-        {!this.state.isCreateAlbumModalOpened ? null : (
-          <Modal show={true} onCloseHandler={this.toggleModal}>
+        {!this.props.isOpenModal ? null : (
+          <Modal
+            show={true}
+            onCloseHandler={() => this.props.toggleCreateAlbumModal()}>
             <ModalBody>
-              <AlbumCreateForm />
+              <AlbumCreateForm
+                toggleModal={this.props.toggleCreateAlbumModal}
+              />
             </ModalBody>
           </Modal>
         )}
@@ -43,4 +47,15 @@ class Navigation extends React.Component {
   }
 }
 
-export default Navigation;
+const mapStateToProps = state => {
+  return {
+    isOpenModal: state.navigation.isOpenModal
+  };
+};
+
+const mapDispatchToProps = {
+  toggleCreateAlbumModal,
+  deleteState
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

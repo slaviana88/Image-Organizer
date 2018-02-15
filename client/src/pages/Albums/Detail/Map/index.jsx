@@ -30,12 +30,14 @@ const MyMapComponent = withScriptjs(
 const mapStateToProps = state => {
   return {
     places: state.album.places,
-    longtitude: _.isNil(state.album.album[0].longtitude)
-      ? -0.12775829999998223
-      : state.album.album[0].longtitude,
-    latitude: _.isNil(state.album.album[0].latitude)
-      ? 51.5073509
-      : state.album.album[0].latitude
+    longtitude:
+      _.isNil(state.album.album) || _.isNil(state.album.album[0].longtitude)
+        ? -0.12775829999998223
+        : parseFloat(state.album.album[0].longtitude),
+    latitude:
+      _.isNil(state.album.album) || _.isNil(state.album.album[0].latitude)
+        ? 51.5073509
+        : parseFloat(state.album.album[0].latitude)
   };
 };
 

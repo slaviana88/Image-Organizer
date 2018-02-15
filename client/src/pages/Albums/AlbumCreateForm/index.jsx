@@ -1,25 +1,32 @@
 import React from 'react';
 import _ from 'lodash';
-import {Dropzone} from 'react-dropzone';
-import {connect} from 'react-redux';
-import {Field, reduxForm} from 'redux-form';
-import {createAlbum} from '../List/actions';
-import {dropzoneField} from '../../../components/Dropzone';
+import { Dropzone } from 'react-dropzone';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import { createAlbum } from '../List/actions';
+import { dropzoneField } from '../../../components/Dropzone';
 import renderInputField from '../../../shared/renderInputField';
 import renderTextArea from '../../../shared/renderTextArea';
 import defaultImage from '../../../assets/images/default_image.png';
 
 import PhotographyDropzone from '../Photography';
+import MyMapComponent from '../Detail/Map';
+import PlacesWithStandaloneSearchBox from '../Detail/Map/SearchBox';
 
 class AlbumCreateForm extends React.Component {
   submit = data => {
-    this.props.createAlbum(data, this.props.images);
+    const data2 = !_.isNil(this.props.directions)
+      ? Object.assign(data, {
+          latitude: this.props.directions.lat(),
+          longtitude: this.props.directions.lng()
+        })
+      : {};
+    const extraActions = [this.props.toggleModal];
+    this.props.createAlbum(data, this.props.images, extraActions);
   };
 
   render() {
-    let dropzone = {ref: null};
-
-    const {handleSubmit, pristine, submitting} = this.props;
+    const { handleSubmit, pristine, submitting } = this.props;
     return (
       <div className="album-create-form">
         <form onSubmit={handleSubmit(this.submit.bind(this))}>
@@ -39,14 +46,15 @@ class AlbumCreateForm extends React.Component {
               type="input"
             />
           </div>
-          <span
-            className="link"
-            onClick={() => {
-              dropzone.ref.open();
-            }}>
-            Add image
-          </span>
           <PhotographyDropzone />
+          <MyMapComponent
+            isMarkerShown={false}
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
+            loadingElement={<div>{'Loading'}</div>}
+            containerElement={<div style={{ height: 500, width: 700 }} />}
+            mapElement={<div style={{ height: 400 }} />}
+          />
+          <PlacesWithStandaloneSearchBox />
           <button
             className="btn btn-primary"
             type="submit"
@@ -63,11 +71,12 @@ AlbumCreateForm = reduxForm({
   form: 'albumCreateForm'
 })(AlbumCreateForm);
 
-const mapDispatchToProps = {createAlbum};
+const mapDispatchToProps = { createAlbum };
 
 const mapStateToProps = state => {
   return {
-    images: _.get(state, 'dropzoneImages.images', [])
+    images: _.get(state, 'dropzoneImages.images', []),
+    directions: _.get(state.album, 'places[0].geometry.location')
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumCreateForm);
