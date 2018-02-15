@@ -1,6 +1,6 @@
-import {SUCCESS_FETCH_ALBUM} from './constants';
+import { SUCCESS_FETCH_ALBUM, SET_PLACES } from './constants';
 
-const initialState = {album: null};
+const initialState = { album: null, places: [] };
 
 const albumReducer = (state = initialState, action) => {
   let newState;
@@ -8,6 +8,12 @@ const albumReducer = (state = initialState, action) => {
     case SUCCESS_FETCH_ALBUM:
       newState = {
         album: action.data
+      };
+      break;
+
+    case SET_PLACES:
+      newState = {
+        places: action.places
       };
       break;
 

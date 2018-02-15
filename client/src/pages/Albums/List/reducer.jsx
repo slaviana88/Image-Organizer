@@ -5,7 +5,7 @@ import {
   SUCCESS_CREATE_ALBUM
 } from './constants';
 
-const initialState = {albums: null};
+const initialState = { albums: [] };
 
 const albumsReducer = (state = initialState, action) => {
   let newState;

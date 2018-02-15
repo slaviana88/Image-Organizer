@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     'Album',
     {
       title: DataTypes.STRING,
-      description: DataTypes.TEXT
+      description: DataTypes.TEXT,
+      longtitude: DataTypes.DECIMAL,
+      latitude: DataTypes.DECIMAL
     },
     {
       classMethods: {

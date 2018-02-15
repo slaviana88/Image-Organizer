@@ -6,8 +6,10 @@ import {Modal, ModalBody} from 'components/Modal';
 import AddImageForm from './AddImageForm';
 import PhotographyDropzone from '../Photography';
 
-import {fetchAlbum, updateAlbum} from './actions';
+import {fetchAlbum, updateAlbum, setPlaces} from './actions';
 import './styles.scss';
+import MyMapComponent from './Map';
+import PlacesWithStandaloneSearchBox from './Map/SearchBox';
 
 const transformDateTimeToDate = dateString => {
   return new Date(dateString).toLocaleDateString('en-GB', {
@@ -18,7 +20,7 @@ const transformDateTimeToDate = dateString => {
 };
 
 class AlbumDetail extends React.Component {
-  state = {imageUrl: null, openAddImage: false};
+  state = { imageUrl: null, openAddImage: false, isOpenGoogleMaps: false };
 
   componentDidMount() {
     this.props.fetchAlbum(this.props.match.params.albumId);
@@ -29,39 +31,21 @@ class AlbumDetail extends React.Component {
     this.setState({imageUrl});
   };
 
-  closeImage = () => this.setState({imageUrl: null});
+closeImage = () => this.setState({ imageUrl: null });
 
-  closeAddImage = () => this.setState({openAddImage: false});
+  toggleGoogleMaps = () =>
+    this.setState({ isOpenGoogleMaps: !this.state.isOpenGoogleMaps });
 
-  openAddImage = () => this.setState({openAddImage: true});
+  closeAddImage = () => this.setState({ openAddImage: false });
+
+  openAddImage = () => this.setState({ openAddImage: true });
 
   updateAlbum = event => {
-    // const imageUrl = 'http://localhost:3001/static/26513009_1807277719296619_1236931395_o.jpg')
-    // new File([], 'asd.txt', {type: 'image/jpeg'})
-    // // console.log(
-    // //   new Blob(
-    // //     'http://localhost:3001/static/26513009_1807277719296619_1236931395_o.jpg',
-    // //     {type: 'image/jpeg'}
-    // //   )
-    // // );
-    // const images = this.props.images.map(img => {
-    //   return new File(
-    //     new Blob(
-    //       'http://localhost:3001/static/26513009_1807277719296619_1236931395_o.jpg'
-    //     ),
-    //     image.name,
-          
-    //   );
-    // });
-
-    // console.log(images);
-
     this.props.updateAlbum(this.props.match.params.albumId, this.props.images);
   };
-
   getAlbum = album => {
     return (
-      <div className="row center-xs">
+      <div className="">
         <div className="col-xs-11">
           <div className="row">
             <div className="col-xs-8">
@@ -78,6 +62,7 @@ class AlbumDetail extends React.Component {
           </div>
           <div className="divider" />
           <div className="album-description">{album.description}</div>
+          <div onClick={() => this.toggleGoogleMaps()}>Open Directions</div>
           <div className="album-dropzone">
             <PhotographyDropzone />
             <button onClick={this.updateAlbum}>Save</button>
@@ -88,8 +73,9 @@ class AlbumDetail extends React.Component {
   };
 
   render() {
-    const {imageUrl, openAddImage} = this.state;
-    const {album} = this.props;
+    const { imageUrl, openAddImage, isOpenGoogleMaps } = this.state;
+    const { album } = this.props;
+
 
     return (
       <div className="album-container">
@@ -105,6 +91,33 @@ class AlbumDetail extends React.Component {
             </ModalBody>
           </Modal>
         )}
+        {isOpenGoogleMaps ? (
+          <Modal show={true} onCloseHandler={this.closeGoogleMaps}>
+            <ModalBody>
+              <div className="row">
+                <div className="col-xs-8 map-container">
+                  <MyMapComponent
+                    isMarkerShown={false}
+                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
+                    loadingElement={<div>{'Loading'}</div>}
+                    containerElement={
+                      <div style={{ height: 500, width: 700 }} />
+                    }
+                    mapElement={<div style={{ height: 400 }} />}
+                  />
+                </div>
+                <div className="col-xs-4 search-box-container">
+                  <PlacesWithStandaloneSearchBox />
+                </div>
+              </div>
+              <div className="save-direction-container">
+                <button className="btn btn-primary save-directions-btn">
+                  Save Directions
+                </button>
+              </div>
+            </ModalBody>
+          </Modal>
+        ) : null}
       </div>
     );
   }
@@ -118,8 +131,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  fetchAlbum: fetchAlbum,
-  updateAlbum: updateAlbum
+  fetchAlbum,
+  setPlaces,
+  updateAlbum
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumDetail);
