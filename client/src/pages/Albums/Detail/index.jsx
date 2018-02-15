@@ -80,6 +80,36 @@ class AlbumDetail extends React.Component {
             </ModalBody>
           </Modal>
         )}
+
+        {isOpenGoogleMaps ? (
+          <Modal show={true} onCloseHandler={this.toggleGoogleMaps}>
+            <ModalBody>
+              <div className="row">
+                <div className="col-xs-8 map-container">
+                  <MyMapComponent
+                    isMarkerShown={false}
+                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
+                    loadingElement={<div>{'Loading'}</div>}
+                    containerElement={
+                      <div style={{ height: 500, width: 700 }} />
+                    }
+                    mapElement={<div style={{ height: 400 }} />}
+                  />
+                </div>
+                <div className="col-xs-4 search-box-container">
+                  <PlacesWithStandaloneSearchBox />
+                </div>
+              </div>
+              <div
+                className="save-direction-container"
+                onClick={() => this.toggleGoogleMaps()}>
+                <button className="btn btn-primary save-directions-btn">
+                  Save Directions
+                </button>
+              </div>
+            </ModalBody>
+          </Modal>
+        ) : null}
       </div>
     );
   }
