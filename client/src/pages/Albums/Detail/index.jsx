@@ -6,8 +6,10 @@ import { Modal, ModalBody } from 'components/Modal';
 import AddImageForm from './AddImageForm';
 import PhotographyDropzone from '../Photography';
 
-import { fetchAlbum } from './actions';
+import { fetchAlbum, setPlaces } from './actions';
 import './styles.scss';
+import MyMapComponent from './Map';
+import PlacesWithStandaloneSearchBox from './Map/SearchBox';
 
 const transformDateTimeToDate = dateString => {
   return new Date(dateString).toLocaleDateString('en-GB', {
@@ -38,7 +40,7 @@ class AlbumDetail extends React.Component {
   getAlbum = album => {
     return (
       <div className="row center-xs">
-        <div className="col-xs-11">
+        {/* <div className="col-xs-11">
           <div className="row">
             <div className="col-xs-8">
               <h2 className="album-title">{album.title}</h2>
@@ -57,7 +59,15 @@ class AlbumDetail extends React.Component {
           <div className="album-dropzone">
             <PhotographyDropzone />
           </div>
-        </div>
+        </div> */}
+        <MyMapComponent
+          isMarkerShown={false}
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
+          loadingElement={<div>{'Loading'}</div>}
+          containerElement={<div style={{ height: 500, width: 600 }} />}
+          mapElement={<div style={{ height: 400 }} />}
+        />
+        <PlacesWithStandaloneSearchBox />
       </div>
     );
   };
@@ -92,7 +102,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  fetchAlbum: fetchAlbum
+  fetchAlbum,
+  setPlaces
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumDetail);
