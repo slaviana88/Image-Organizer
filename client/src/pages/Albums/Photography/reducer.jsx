@@ -1,6 +1,12 @@
 import _ from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
-import { ADD_IMAGE, REMOVE_IMAGE, MOVE_IMAGE, DELETE_STATE } from './constants';
+import {
+  ADD_IMAGE,
+  REMOVE_IMAGE,
+  MOVE_IMAGE,
+  DELETE_STATE,
+  ADD_INITIAL_IMAGES
+} from './constants';
 
 const initialState = {
   images: []
@@ -20,6 +26,13 @@ const dropzoneImagesReducer = (state = initialState, action) => {
       };
       newState = {
         images: state.images.concat(imageToAdd)
+      };
+      break;
+
+    case ADD_INITIAL_IMAGES:
+      console.log(action);
+      newState = {
+        images: action.images
       };
       break;
 

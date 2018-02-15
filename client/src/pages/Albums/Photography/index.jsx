@@ -17,28 +17,29 @@ import './styles.scss';
 
 const Image = SortableElement(({ image, deleteImage, isDraggable }) => {
   const getImageStyle = image => {
-    if (image.newImage) {
-      return { backgroundImage: `url(${image.preview})` };
-    }
-    return image;
+    return { backgroundImage: `url(${image.preview})` };
   };
   const draggableClass = isDraggable ? 'draggable-image' : '';
 
   return (
     <div className="col-xs-2">
-      <div
-        className={`property-image-sortable ${draggableClass}`}
-        style={getImageStyle(image)}>
-        {isDraggable ? (
-          ''
-        ) : (
-          <img
-            src="/assets/images/icon-cross.svg"
-            className="delete-button"
-            onClick={() => deleteImage(image)}
-          />
-        )}
-      </div>
+      {image.newImage ? (
+        <div
+          className={`property-image-sortable ${draggableClass}`}
+          style={getImageStyle(image)}>
+          {isDraggable ? (
+            ''
+          ) : (
+            <img
+              src="/assets/images/icon-cross.svg"
+              className="delete-button"
+              onClick={() => deleteImage(image)}
+            />
+          )}
+        </div>
+      ) : (
+        <img src={'http://localhost:3001/static/' + image.pathToFile} />
+      )}
     </div>
   );
 });
@@ -120,6 +121,7 @@ class PhotographyDropzone extends React.Component {
   render() {
     const { handleSubmit, pristine, reset, submitting, images } = this.props;
     const { tooSmallImages } = this.state;
+    console.log(images);
 
     const uploadFiles =
       images.length === 0 ? (
