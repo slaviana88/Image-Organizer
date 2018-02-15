@@ -50,28 +50,15 @@ module.exports = {
       res.status(201).send('File uploaded');
     } else {
       const {images} = req.body;
-
-      const imageToSave = images.map(img => ({pathToFile: img, name: img}));
-      images.map(img => {
-        const image = Image.create({pathToFile: img, name: img}).then(image => {
-  
-
-          const album = Album.findAll({
-          where: {id: req.params.albumId},
-          include: {model: Image, as: 'images'}
-        }).then(album => {
-
-          console.log("ALBUUUMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM", album[0])
-          console.log("IMAGEEEEEEEEEEEEEEEEEEEEEE", image)
-          album[0].images.push([image])
-          album[0].save()
-        })
+        Image.destroy({
+          where: {AlbumId: parseInt(req.params.albumId)}
+        }).then(() => {
+          const imageToSave = images.map(img => ({pathToFile: img, name: img}));
+          images.map(img => {
+            const image = Image.create({pathToFile: img, name: img, AlbumId:  req.params.albumId})
+          })
           
         })
-      })
-      
-      
-
       res.status(201).send("ok")
     }
   }
