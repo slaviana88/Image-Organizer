@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { Modal, ModalBody } from 'components/Modal';
 import AddImageForm from './AddImageForm';
+import PhotographyDropzone from '../Photography';
 
 import { fetchAlbum } from './actions';
 import './styles.scss';
@@ -28,26 +29,14 @@ class AlbumDetail extends React.Component {
 
   getAlbum = album => {
     return (
-      <div>
-        <div>Title{album.title}</div>
-        <div>Descr{album.description}</div>
-        <div>Created {album.createdAt}</div>
-        <div>Updated {album.updatedAt}</div>
-        {album.images &&
-          album.images.map((img, index) => {
-            return (
-              <div
-                key={index}
-                className="col-md-3"
-                onClick={() => this.viewImage(img.pathToFile)}>
-                name {img.name}
-                <img
-                  className="image"
-                  src={'http://localhost:3001/static/' + img.pathToFile}
-                />
-              </div>
-            );
-          })}
+      <div class="row center-xs">
+        <div class="col-xs-10">
+          <div>Title{album.title}</div>
+          <div>Descr{album.description}</div>
+          <div>Created {album.createdAt}</div>
+          <div>Updated {album.updatedAt}</div>
+          <PhotographyDropzone />
+        </div>
       </div>
     );
   };
@@ -71,14 +60,14 @@ class AlbumDetail extends React.Component {
           </Modal>
         )}
 
-        {openAddImage && (
+        {/* {openAddImage && (
           <Modal show={true} onCloseHandler={this.closeAddImage}>
             <ModalBody>
               <AddImageForm />
             </ModalBody>
           </Modal>
         )}
-        <button onClick={this.openAddImage}>Add image</button>
+        <button onClick={this.openAddImage}>Add image</button> */}
       </div>
     );
   }

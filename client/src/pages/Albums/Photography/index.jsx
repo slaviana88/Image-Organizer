@@ -3,14 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 
-import {
-  requestUpdatePhotographySection,
-  addImage,
-  removeImage,
-  moveImage
-} from '../actions';
+import { addImage, removeImage, moveImage, deleteState } from './actions';
 
-import { renderToggle } from '../../../../shared/RenderToggle/';
+import { renderToggle } from '../../../shared/RenderToggle/';
 import {
   SortableContainer,
   SortableElement,
@@ -22,28 +17,29 @@ import './styles.scss';
 
 const Image = SortableElement(({ image, deleteImage, isDraggable }) => {
   const getImageStyle = image => {
-    if (image.newImage) {
-      return { backgroundImage: `url(${image.preview})` };
-    }
-    return image;
+    return { backgroundImage: `url(${image.preview})` };
   };
   const draggableClass = isDraggable ? 'draggable-image' : '';
 
   return (
     <div className="col-xs-2">
-      <div
-        className={`property-image-sortable ${draggableClass}`}
-        style={getImageStyle(image)}>
-        {isDraggable ? (
-          ''
-        ) : (
-          <img
-            src="/assets/images/icon-cross.svg"
-            className="delete-button"
-            onClick={() => deleteImage(image)}
-          />
-        )}
-      </div>
+      {image.newImage ? (
+        <div
+          className={`property-image-sortable ${draggableClass}`}
+          style={getImageStyle(image)}>
+          {isDraggable ? (
+            ''
+          ) : (
+            <img
+              src="/assets/images/icon-cross.svg"
+              className="delete-button"
+              onClick={() => deleteImage(image)}
+            />
+          )}
+        </div>
+      ) : (
+        <img src={'http://localhost:3001/static/' + image.pathToFile} />
+      )}
     </div>
   );
 });
@@ -91,6 +87,10 @@ class PhotographyDropzone extends React.Component {
     };
   }
 
+  componentWillUnmount() {
+    this.props.deleteState();
+  }
+
   toggleReorder = () => {
     this.setState({
       reorderImages: !this.state.reorderImages
@@ -121,6 +121,7 @@ class PhotographyDropzone extends React.Component {
   render() {
     const { handleSubmit, pristine, reset, submitting, images } = this.props;
     const { tooSmallImages } = this.state;
+    console.log(images);
 
     const uploadFiles =
       images.length === 0 ? (
@@ -131,9 +132,7 @@ class PhotographyDropzone extends React.Component {
               <br />
               click below to choose files from your device.
             </div>
-            <button className="btn btn btn-primary upload-images">
-              Upload Images
-            </button>
+            <div className="btn btn-primary upload-images">Upload Images</div>
             <div className="upload-images-label">
               JPG or PNG supproted, minimum size is ..
             </div>
@@ -181,14 +180,15 @@ class PhotographyDropzone extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    images: _.get(state, 'createAlbum.images', [])
+    images: _.get(state, 'dropzoneImages.images', [])
   };
 };
 
 const mapDispatchToProps = {
   addImage,
   removeImage,
-  moveImage
+  moveImage,
+  deleteState
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
