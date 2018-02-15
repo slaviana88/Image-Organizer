@@ -4,6 +4,37 @@
   padding: 20px;
   padding-top: 90px;
 
+  .album-title {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+  }
+  .album-dates {
+    text-align: right;
+    .album-date-info {
+      margin-left: 10px;
+      color: #41464c;
+    }
+  }
+
+  .divider {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 100%;
+    border-top: solid 1px #ced0da;
+  }
+
+  .album-description {
+    text-align: left;
+  }
+
+  .album-dropzone {
+    margin-top: 30px;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    background-color: #ffffff;
+  }
+
   .tc-modal-body {
     display: flex;
   }
