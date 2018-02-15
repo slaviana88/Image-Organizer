@@ -1,12 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-import { Modal, ModalBody } from 'components/Modal';
+import {Modal, ModalBody} from 'components/Modal';
 import AddImageForm from './AddImageForm';
 import PhotographyDropzone from '../Photography';
 
-import { fetchAlbum, setPlaces } from './actions';
+import {fetchAlbum, updateAlbum, setPlaces} from './actions';
 import './styles.scss';
 import MyMapComponent from './Map';
 import PlacesWithStandaloneSearchBox from './Map/SearchBox';
@@ -28,10 +28,10 @@ class AlbumDetail extends React.Component {
 
   viewImage = imageUrl => {
     console.log(imageUrl);
-    this.setState({ imageUrl });
+    this.setState({imageUrl});
   };
 
-  closeImage = () => this.setState({ imageUrl: null });
+closeImage = () => this.setState({ imageUrl: null });
 
   toggleGoogleMaps = () =>
     this.setState({ isOpenGoogleMaps: !this.state.isOpenGoogleMaps });
@@ -40,6 +40,9 @@ class AlbumDetail extends React.Component {
 
   openAddImage = () => this.setState({ openAddImage: true });
 
+  updateAlbum = event => {
+    this.props.updateAlbum(this.props.match.params.albumId, this.props.images);
+  };
   getAlbum = album => {
     return (
       <div className="">
@@ -62,6 +65,7 @@ class AlbumDetail extends React.Component {
           <div onClick={() => this.toggleGoogleMaps()}>Open Directions</div>
           <div className="album-dropzone">
             <PhotographyDropzone />
+            <button onClick={this.updateAlbum}>Save</button>
           </div>
         </div>
       </div>
@@ -71,6 +75,7 @@ class AlbumDetail extends React.Component {
   render() {
     const { imageUrl, openAddImage, isOpenGoogleMaps } = this.state;
     const { album } = this.props;
+
 
     return (
       <div className="album-container">
@@ -120,13 +125,15 @@ class AlbumDetail extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    album: state.album.album
+    album: state.album.album,
+    images: state.dropzoneImages.images
   };
 };
 
 const mapDispatchToProps = {
   fetchAlbum,
-  setPlaces
+  setPlaces,
+  updateAlbum
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumDetail);

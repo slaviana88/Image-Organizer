@@ -1,3 +1,4 @@
+const  _ = require('lodash')
 const fs = require('fs');
 
 const Album = require('../models').Album;
@@ -10,12 +11,21 @@ module.exports = {
     console.log('files', req.files);
 
     if (req.files) {
+      if (_.isArray(req.files.file)) {
       req.files.file.map(file => {
         const path = `${__dirname}/images/${file.name}`;
         file.mv(path, function(err) {
           if (err) return res.status(500).send(err);
         });
-      });
+      })}
+      else {
+         const {file} = req.files
+        const path = `${__dirname}/images/${file.name}`
+        file.mv(path, function(err) {
+          if (err) return res.status(500).send(err);
+        })
+
+      }
       console.log('File uploaded!');
       res.status(201).send('File uploaded');
     } else {
@@ -35,7 +45,40 @@ module.exports = {
         .catch(error => res.status(400).send(error.message));
     }
   },
-  addImage(req, res) {
-    console.log('here');
+  update(req, res) {
+    console.log('request body', req.body);
+    console.log('files', req.files);
+
+    if (req.files) {
+     if (_.isArray(req.files.file)) {
+        req.files.file.map(file => {
+          const path = `${__dirname}/images/${file.name}`;
+          file.mv(path, function(err) {
+            if (err) return res.status(500).send(err);
+          });
+        })
+      }
+      else {
+        const {file} = req.files
+        const path = `${__dirname}/images/${file.name}`
+        file.mv(path, function(err) {
+          if (err) return res.status(500).send(err);
+        })
+      }
+      console.log('File uploaded!');
+      res.status(201).send('File uploaded');
+    } else {
+      const {images} = req.body;
+        Image.destroy({
+          where: {AlbumId: parseInt(req.params.albumId)}
+        }).then(() => {
+          const imageToSave = images.map(img => ({pathToFile: img, name: img}));
+          images.map(img => {
+            const image = Image.create({pathToFile: img, name: img, AlbumId:  req.params.albumId})
+          })
+          
+        })
+      res.status(201).send("ok")
+    }
   }
 };

@@ -38,5 +38,5 @@ module.exports = app => {
 
   app.post('/api/albums/create', services.albums.create);
 
-  app.post('/api/albums/:albumId/add-image', services.albums.addImage);
+  app.post('/api/albums/:albumId/update', services.albums.update);
 };
