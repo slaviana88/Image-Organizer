@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Dropzone from 'react-dropzone';
 
 import {
@@ -10,20 +10,20 @@ import {
   moveImage
 } from '../actions';
 
-import { renderToggle } from '../../../../shared/RenderToggle/';
+import {renderToggle} from '../../../../shared/RenderToggle/';
 import {
   SortableContainer,
   SortableElement,
   arrayMove
 } from 'react-sortable-hoc';
-import { checkImageIsBigEnough } from './utils';
+import {checkImageIsBigEnough} from './utils';
 
 import './styles.scss';
 
-const Image = SortableElement(({ image, deleteImage, isDraggable }) => {
+const Image = SortableElement(({image, deleteImage, isDraggable}) => {
   const getImageStyle = image => {
     if (image.newImage) {
-      return { backgroundImage: `url(${image.preview})` };
+      return {backgroundImage: `url(${image.preview})`};
     }
     return image;
   };
@@ -49,7 +49,7 @@ const Image = SortableElement(({ image, deleteImage, isDraggable }) => {
 });
 
 const Images = SortableContainer(
-  ({ items, deleteImage, reorderImages, toggleReorder }) => {
+  ({items, deleteImage, reorderImages, toggleReorder}) => {
     return (
       <div>
         <div className="row images-stats">
@@ -97,12 +97,12 @@ class PhotographyDropzone extends React.Component {
     });
   };
 
-  onSortEnd = ({ oldIndex, newIndex }) => {
+  onSortEnd = ({oldIndex, newIndex}) => {
     this.props.moveImage(oldIndex, newIndex);
   };
 
   onDrop(files) {
-    this.setState({ tooSmallImages: [] });
+    this.setState({tooSmallImages: []});
 
     let showError = newFile => {
       this.setState(prevState => ({
@@ -111,7 +111,6 @@ class PhotographyDropzone extends React.Component {
     };
 
     files.forEach(file => {
-      console.log('dispatch', file);
       // checkImageIsBigEnough(file, 200, 200)
       this.props.addImage(file);
       // .catch(showError);
@@ -119,8 +118,8 @@ class PhotographyDropzone extends React.Component {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, images } = this.props;
-    const { tooSmallImages } = this.state;
+    const {handleSubmit, pristine, reset, submitting, images} = this.props;
+    const {tooSmallImages} = this.state;
 
     const uploadFiles =
       images.length === 0 ? (
@@ -131,9 +130,9 @@ class PhotographyDropzone extends React.Component {
               <br />
               click below to choose files from your device.
             </div>
-            <button className="btn btn btn-primary upload-images">
+            {/*            <button className="btn btn btn-primary upload-images">
               Upload Images
-            </button>
+            </button>*/}
             <div className="upload-images-label">
               JPG or PNG supproted, minimum size is ..
             </div>
@@ -167,7 +166,7 @@ class PhotographyDropzone extends React.Component {
         )}
         <Dropzone
           multiple={true}
-          style={{ position: 'relative' }}
+          style={{position: 'relative'}}
           accept="image/jpeg, image/png"
           name="property_images"
           className="property-images"

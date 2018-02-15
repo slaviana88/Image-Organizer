@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { arrayMove } from 'react-sortable-hoc';
-import { ADD_IMAGE, REMOVE_IMAGE, MOVE_IMAGE } from './constants';
+import {arrayMove} from 'react-sortable-hoc';
+import {ADD_IMAGE, REMOVE_IMAGE, MOVE_IMAGE} from './constants';
 
 const initialState = {
   images: []
@@ -21,6 +21,7 @@ const createAlbumReducer = (state = initialState, action) => {
       newState = {
         images: state.images.concat(imageToAdd)
       };
+      console.log('in add image reducer');
       break;
 
     case REMOVE_IMAGE:

@@ -1,10 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
-import { Dropzone } from 'react-dropzone';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { createAlbum } from '../List/actions';
-import { dropzoneField } from '../../../components/Dropzone';
+import {Dropzone} from 'react-dropzone';
+import {connect} from 'react-redux';
+import {Field, reduxForm} from 'redux-form';
+import {createAlbum} from '../List/actions';
+import {dropzoneField} from '../../../components/Dropzone';
 import renderInputField from '../../../shared/renderInputField';
 import renderTextArea from '../../../shared/renderTextArea';
 import defaultImage from '../../../assets/images/default_image.png';
@@ -21,14 +21,15 @@ class AlbumCreateForm extends React.Component {
         file_type: image.type
       })
     );
-
+    console.log('filedata', fileData);
+    console.log(this.props.images);
     this.props.createAlbum(data, fileData, this.props.images);
   };
 
   render() {
-    let dropzone = { ref: null };
+    let dropzone = {ref: null};
 
-    const { handleSubmit, pristine, submitting } = this.props;
+    const {handleSubmit, pristine, submitting} = this.props;
     return (
       <div className="album-create-form">
         <form onSubmit={handleSubmit(this.submit.bind(this))}>
@@ -72,7 +73,7 @@ AlbumCreateForm = reduxForm({
   form: 'albumCreateForm'
 })(AlbumCreateForm);
 
-const mapDispatchToProps = { createAlbum };
+const mapDispatchToProps = {createAlbum};
 
 const mapStateToProps = state => {
   return {
