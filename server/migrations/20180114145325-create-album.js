@@ -14,6 +14,8 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
+      longtitude: { type: Sequelize.DECIMAL, allowNull: true },
+      latitude: { type: Sequelize.DECIMAL, allowNull: true },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
