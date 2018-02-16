@@ -1,12 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-import { Modal, ModalBody } from 'components/Modal';
+import {Modal, ModalBody} from 'components/Modal';
 import AddImageForm from './AddImageForm';
 import PhotographyDropzone from '../Photography';
 
-import { fetchAlbum, updateAlbum, setPlaces } from './actions';
+import {fetchAlbum, updateAlbum, setPlaces} from './actions';
 import './styles.scss';
 import MyMapComponent from './Map';
 import PlacesWithStandaloneSearchBox from './Map/SearchBox';
@@ -20,7 +20,7 @@ const transformDateTimeToDate = dateString => {
 };
 
 class AlbumDetail extends React.Component {
-  state = { imageUrl: null, openAddImage: false, isOpenGoogleMaps: false };
+  state = {imageUrl: null, openAddImage: false, isOpenGoogleMaps: false};
 
   componentDidMount() {
     this.props.fetchAlbum(this.props.match.params.albumId);
@@ -28,17 +28,17 @@ class AlbumDetail extends React.Component {
 
   viewImage = imageUrl => {
     console.log(imageUrl);
-    this.setState({ imageUrl });
+    this.setState({imageUrl});
   };
 
-  closeImage = () => this.setState({ imageUrl: null });
+  closeImage = () => this.setState({imageUrl: null});
 
   toggleGoogleMaps = () =>
-    this.setState({ isOpenGoogleMaps: !this.state.isOpenGoogleMaps });
+    this.setState({isOpenGoogleMaps: !this.state.isOpenGoogleMaps});
 
-  closeAddImage = () => this.setState({ openAddImage: false });
+  closeAddImage = () => this.setState({openAddImage: false});
 
-  openAddImage = () => this.setState({ openAddImage: true });
+  openAddImage = () => this.setState({openAddImage: true});
 
   updateAlbum = event => {
     const data = !_.isNil(this.props.directions)
@@ -86,7 +86,7 @@ class AlbumDetail extends React.Component {
             </div>
           </div>
           <div className="album-dropzone">
-            <PhotographyDropzone />
+            <PhotographyDropzone viewImage={this.viewImage} />
             <div className="save-btn-container">
               <button
                 className="btn btn-secondary save-changes"
@@ -101,8 +101,8 @@ class AlbumDetail extends React.Component {
   };
 
   render() {
-    const { imageUrl, openAddImage, isOpenGoogleMaps } = this.state;
-    const { album } = this.props;
+    const {imageUrl, openAddImage, isOpenGoogleMaps} = this.state;
+    const {album} = this.props;
 
     return (
       <div className="album-container">
@@ -111,10 +111,9 @@ class AlbumDetail extends React.Component {
         {imageUrl && (
           <Modal show={true} onCloseHandler={this.closeImage}>
             <ModalBody>
-              <div className="view-image">
-                <img src={'http://localhost:3001/static/' + imageUrl} />
+              <div className="row center-xs">
+                <img src={imageUrl} />
               </div>
-              <div>Tags and places here</div>
             </ModalBody>
           </Modal>
         )}
@@ -128,10 +127,8 @@ class AlbumDetail extends React.Component {
                     isMarkerShown={false}
                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
                     loadingElement={<div>{'Loading'}</div>}
-                    containerElement={
-                      <div style={{ height: 500, width: 700 }} />
-                    }
-                    mapElement={<div style={{ height: 400 }} />}
+                    containerElement={<div style={{height: 500, width: 700}} />}
+                    mapElement={<div style={{height: 400}} />}
                   />
                 </div>
                 <div className="col-xs-4 search-box-container">

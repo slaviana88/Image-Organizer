@@ -1,3 +1,14 @@
 .album-create-form {
   line-height: 20px;
 }
+.google-maps-container {
+  display: flex;
+  .map {
+    flex: 1;
+  }
+}
+
+.choose-direction {
+  display: flex;
+  margin: 20px;
+}
