@@ -5,7 +5,7 @@ import {
   SUCCESS_CREATE_ALBUM
 } from './constants';
 
-const initialState = { albums: [] };
+const initialState = {albums: []};
 
 const albumsReducer = (state = initialState, action) => {
   let newState;
@@ -18,8 +18,6 @@ const albumsReducer = (state = initialState, action) => {
       break;
 
     case SUCCESS_CREATE_ALBUM:
-      console.log('create reducer');
-      console.log(action.data);
       newState = {
         albums: state.albums.concat(action.data)
       };

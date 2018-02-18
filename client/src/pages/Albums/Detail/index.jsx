@@ -124,7 +124,7 @@ class AlbumDetail extends React.Component {
               <div className="row">
                 <div className="col-xs-8 map-container">
                   <MyMapComponent
-                    isMarkerShown={false}
+                    isMarkerShown={true}
                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
                     loadingElement={<div>{'Loading'}</div>}
                     containerElement={<div style={{height: 500, width: 700}} />}
