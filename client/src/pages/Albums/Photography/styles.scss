@@ -29,10 +29,11 @@
   margin-bottom: 10px;
   .row-container {
     margin-left: 0;
+    height: 200px;
 
     .upload-images-container {
       margin-top: 40px;
-      height: 340px;
+      height: auto;
 
       .new-listing-upload-images-title {
         font-size: 18px;
@@ -73,6 +74,8 @@
   padding-right: 10px;
 }
 .property-image-sortable {
+  padding-right: 10px;
+
   height: 130px;
   margin: 10px 0 10px 0;
   border-radius: 4px;
@@ -81,6 +84,8 @@
   background-repeat: no-repeat;
   user-select: none;
   cursor: pointer;
+  width: 100%;
+
   .delete-button {
     border: 3px solid white;
     border-radius: 50%;

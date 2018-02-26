@@ -15,40 +15,48 @@ import {checkImageIsBigEnough} from './utils';
 
 import './styles.scss';
 
-const Image = SortableElement(({image, deleteImage, isDraggable}) => {
-  const getImageStyle = image => {
-    return {backgroundImage: `url(${image.preview})`};
-  };
-  const draggableClass = isDraggable ? 'draggable-image' : '';
+const Image = SortableElement(
+  ({image, deleteImage, isDraggable, viewImage}) => {
+    console.log('in image', viewImage);
+    console.log(image);
+    const getImageStyle = image => {
+      return {backgroundImage: `url(${image.preview})`};
+    };
+    const draggableClass = isDraggable ? 'draggable-image' : '';
 
-  return (
-    <div className="col-xs-2">
-      {image.newImage ? (
-        <div
-          className={`property-image-sortable ${draggableClass}`}
-          style={getImageStyle(image)}>
-          {isDraggable ? (
-            ''
-          ) : (
-            <img
-              src="/assets/images/icon-cross.svg"
-              className="delete-button"
-              onClick={() => deleteImage(image)}
-            />
-          )}
-        </div>
-      ) : (
-        <img
-          className="property-image-sortable"
-          src={'http://localhost:3001/static/' + image.pathToFile}
-        />
-      )}
-    </div>
-  );
-});
+    return (
+      <div className="col-xs-2">
+        {image.newImage ? (
+          <div
+            onClick={() => viewImage(image.preview)}
+            className={`property-image-sortable ${draggableClass}`}
+            style={getImageStyle(image)}>
+            {isDraggable ? (
+              ''
+            ) : (
+              <img
+                src="/assets/images/icon-cross.svg"
+                className="delete-button"
+                onClick={() => deleteImage(image)}
+              />
+            )}
+          </div>
+        ) : (
+          <img
+            onClick={() =>
+              viewImage('http://localhost:3001/static/' + image.pathToFile)}
+            className="property-image-sortable"
+            src={'http://localhost:3001/static/' + image.pathToFile}
+          />
+        )}
+      </div>
+    );
+  }
+);
 
 const Images = SortableContainer(
-  ({items, deleteImage, reorderImages, toggleReorder}) => {
+  ({items, deleteImage, reorderImages, toggleReorder, viewImage}) => {
+    console.log('in images', viewImage);
     return (
       <div>
         <div className="row images-stats">
@@ -73,6 +81,7 @@ const Images = SortableContainer(
               deleteImage={deleteImage}
               disabled={!reorderImages}
               isDraggable={reorderImages}
+              viewImage={viewImage}
             />
           ))}
         </div>
@@ -123,7 +132,7 @@ class PhotographyDropzone extends React.Component {
   render() {
     const {handleSubmit, pristine, reset, submitting, images} = this.props;
     const {tooSmallImages} = this.state;
-
+    console.log(this.props.viewImage);
     const uploadFiles =
       images.length === 0 ? (
         <div className="row center-xs row-container">
@@ -154,6 +163,7 @@ class PhotographyDropzone extends React.Component {
         )}
         {images.length !== 0 ? (
           <Images
+            viewImage={this.props.viewImage}
             distance={5}
             axis="xy"
             items={images}
